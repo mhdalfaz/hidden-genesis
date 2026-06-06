@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { jost, cormorant, bebas } from './fonts'
 import './globals.css'
 import Navbar from './components/Navbar'
+import FloatingOrder from './components/FloatingOrder'
 
 export const metadata: Metadata = {
   title: 'Hidden Genesis — Born From Silence',
@@ -21,6 +22,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <Navbar />
         {children}
+        <FloatingOrder />
       </body>
     </html>
   )

@@ -19,12 +19,6 @@ const footerContact = [
   { href: '#', label: 'Email' },
 ]
 
-const footerSocials = [
-  { href: '#', label: 'Instagram' },
-  { href: '#', label: 'TikTok' },
-  { href: '#', label: 'Shopee' },
-]
-
 export default function Footer() {
   return (
     <footer className="bg-black border-t border-dark-gray px-6 md:px-[60px] pt-20 md:pt-[80px] pb-10 md:pb-10">
@@ -83,20 +77,9 @@ export default function Footer() {
       </div>
 
       {/* Bottom */}
-      <div className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0 pt-8 border-t border-dark-gray">
+      <div className="pt-8 border-t border-dark-gray text-center">
         <div className="text-[11px] text-dark-gray tracking-[0.2em]">
           &copy; 2026 Hidden Genesis. All rights reserved.
-        </div>
-        <div className="flex gap-6">
-          {footerSocials.map((s) => (
-            <a
-              key={s.label}
-              href={s.href}
-              className="text-[10px] tracking-[0.3em] uppercase text-mid-gray no-underline transition-colors hover:text-white"
-            >
-              {s.label}
-            </a>
-          ))}
         </div>
       </div>
     </footer>
