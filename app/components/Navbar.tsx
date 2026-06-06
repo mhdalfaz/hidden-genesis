@@ -22,7 +22,7 @@ export default function Navbar() {
 
   const navBg = scrolled
     ? 'rgba(10,10,10,0.97)'
-    : 'linear-gradient(to bottom, rgba(10,10,10,0.95) 0%, transparent 100%)'
+    : '#0a0a0a'
 
   return (
     <nav
@@ -70,7 +70,7 @@ export default function Navbar() {
 
       {/* Mobile menu */}
       {open && (
-        <div className="absolute top-full left-0 right-0 bg-black/97 flex flex-col items-center py-8 gap-6 md:hidden">
+        <div className="absolute top-full left-0 right-0 bg-black flex flex-col items-center py-8 gap-6 md:hidden">
           {links.map((l) => (
             <a
               key={l.href}

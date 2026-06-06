@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import ScrollReveal from './ScrollReveal'
 
 const accItems = [
@@ -73,14 +74,7 @@ const extraItems = [
   {
     label: 'Sticker Pack',
     sub: '6 pcs per set',
-    svg: (
-      <svg viewBox="0 0 100 80" style={{ width: 80, height: 60, flexShrink: 0 }}>
-        <rect x="5" y="10" width="40" height="55" rx="4" fill="#1a1a1a" />
-        <text x="25" y="42" fontFamily="serif" fontSize="10" fill="#2a2a2a" textAnchor="middle" letterSpacing="1">HG</text>
-        <rect x="52" y="18" width="42" height="42" rx="21" fill="#1c1c1c" />
-        <text x="73" y="44" fontFamily="serif" fontSize="10" fill="#252525" textAnchor="middle">HG</text>
-      </svg>
-    ),
+    image: '/images/stickers.jpg',
   },
   {
     label: 'Silicone Wristband',
@@ -142,10 +136,16 @@ export default function Accessories() {
           {extraItems.map((e) => (
             <div
               key={e.label}
-              className="bg-charcoal flex flex-row items-center p-8 md:p-8 gap-8"
+              className="bg-charcoal flex flex-row items-center p-8 gap-8"
               style={{ aspectRatio: 'auto' }}
             >
-              {e.svg}
+              {'image' in e ? (
+                <div className="relative w-20 h-20 flex-shrink-0">
+                  <Image src={e.image!} alt={e.label} fill className="object-cover rounded" />
+                </div>
+              ) : (
+                e.svg
+              )}
               <div>
                 <div className="text-[10px] tracking-[0.3em] uppercase text-mid-gray mb-2">{e.label}</div>
                 <div className="text-[12px] text-dark-gray">{e.sub}</div>

@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import ScrollReveal from './ScrollReveal'
 
 export default function BrandStory() {
@@ -43,34 +44,12 @@ export default function BrandStory() {
         <ScrollReveal delay={300}>
           <div className="relative">
             <div className="bg-charcoal aspect-[3/4] relative overflow-hidden">
-              <svg viewBox="0 0 400 540" style={{ width: '100%', height: '100%', display: 'block' }}>
-                <rect width="400" height="540" fill="#141414" />
-                <radialGradient id="storyLight" cx="60%" cy="25%" r="60%">
-                  <stop offset="0%" stopColor="#222" />
-                  <stop offset="100%" stopColor="#0e0e0e" />
-                </radialGradient>
-                <rect width="400" height="540" fill="url(#storyLight)" />
-                <path d="M145 340 Q135 400 128 490 Q138 495 155 492 Q162 420 178 355Z" fill="#131313" />
-                <path d="M255 340 Q265 400 272 490 Q262 495 245 492 Q238 420 222 355Z" fill="#131313" />
-                <ellipse cx="140" cy="492" rx="25" ry="9" fill="#111" transform="rotate(-3,140,492)" />
-                <rect x="118" y="485" width="44" height="12" rx="3" fill="#1a1a1a" transform="rotate(-3,140,492)" />
-                <ellipse cx="260" cy="492" rx="25" ry="9" fill="#111" transform="rotate(3,260,492)" />
-                <rect x="238" y="485" width="44" height="12" rx="3" fill="#1a1a1a" transform="rotate(3,260,492)" />
-                <path d="M135 210 Q122 225 120 270 Q117 320 120 340 L280 340 Q283 320 280 270 Q278 225 265 210Z" fill="#171717" />
-                <text x="200" y="268" fontFamily="serif" fontSize="12" fill="#222" textAnchor="middle" letterSpacing="1.5">NOT EVERYTHING</text>
-                <text x="200" y="286" fontFamily="serif" fontSize="12" fill="#222" textAnchor="middle" letterSpacing="1.5">NEEDS A REACTION</text>
-                <line x1="170" y1="295" x2="230" y2="295" stroke="#1e1e1e" strokeWidth="0.8" />
-                <rect x="185" y="212" width="30" height="15" rx="2" fill="#141414" />
-                <text x="200" y="223" fontFamily="serif" fontSize="6" fill="#202020" textAnchor="middle" letterSpacing="1">HG</text>
-                <path d="M120 210 Q102 218 96 248 Q92 264 100 276 Q110 287 122 281 Q133 258 142 232Z" fill="#171717" />
-                <path d="M280 210 Q298 218 304 248 Q308 264 300 276 Q290 287 278 281 Q267 258 258 232Z" fill="#171717" />
-                <ellipse cx="200" cy="185" rx="38" ry="42" fill="#1e130d" />
-                <path d="M162 178 Q165 150 200 145 Q235 150 238 178 Q228 162 200 160 Q172 162 162 178Z" fill="#111" />
-                <rect x="185" y="195" width="30" height="22" rx="5" fill="#1c1108" opacity="0.9" />
-                <rect x="289" y="272" width="20" height="14" rx="3" fill="#1c1c1c" />
-                <rect x="290" y="273" width="18" height="12" rx="2" fill="#111" />
-                <text x="30" y="520" fontFamily="serif" fontSize="10" fill="#1c1c1c" letterSpacing="6">HIDDEN GENESIS</text>
-              </svg>
+              <Image
+                src="/images/logo.png"
+                alt="Hidden Genesis brand label"
+                fill
+                className="object-cover"
+              />
             </div>
             {/* Border frame effect */}
             <div className="absolute top-5 left-5 right-[-20px] bottom-[-20px] border border-dark-gray -z-0 pointer-events-none" />

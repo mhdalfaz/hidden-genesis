@@ -8,7 +8,7 @@ export default function Hero() {
       style={{ padding: 0 }}
     >
       {/* Left */}
-      <div className="flex flex-col justify-end px-6 md:px-[60px] pt-20 md:pb-[160px] relative z-10">
+      <div className="flex flex-col justify-end px-6 md:px-[60px] pt-30 md:pb-[160px] relative z-10">
         <div className="flex items-center gap-4 mb-6">
           <span className="w-10 h-[1px] bg-accent" />
           <span className="text-[10px] tracking-[0.4em] uppercase text-accent">

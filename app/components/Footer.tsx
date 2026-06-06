@@ -32,7 +32,7 @@ export default function Footer() {
         {/* Brand */}
         <div>
           <div className="font-serif text-[28px] font-light tracking-[0.3em] text-white uppercase mb-5">
-            H<span className="text-accent italic">idden</span> Genesis
+            Hidden Genesis
           </div>
           <p className="text-[12px] text-mid-gray leading-relaxed max-w-[260px]">
             Born from silence. Worn by those who understand that presence needs no announcement.
