@@ -1,0 +1,1993 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hidden Genesis — Born From Silence</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bebas+Neue&family=Jost:wght@200;300;400&display=swap"
+        rel="stylesheet">
+    <style>
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --black: #0a0a0a;
+            --near-black: #111111;
+            --charcoal: #1c1c1c;
+            --dark-gray: #2a2a2a;
+            --mid-gray: #555;
+            --light-gray: #999;
+            --silver: #ccc;
+            --off-white: #f0ede8;
+            --white: #ffffff;
+            --accent: #c8b89a;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: var(--black);
+            color: var(--off-white);
+            font-family: 'Jost', sans-serif;
+            font-weight: 300;
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Custom cursor */
+        .cursor {
+            position: fixed;
+            width: 8px;
+            height: 8px;
+            background: var(--white);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-ring {
+            position: fixed;
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.15s ease;
+            mix-blend-mode: difference;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 24px 48px;
+            background: linear-gradient(to bottom, rgba(10, 10, 10, 0.95) 0%, transparent 100%);
+        }
+
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            font-weight: 300;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .nav-logo span {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--silver);
+            text-decoration: none;
+            font-size: 11px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--white);
+        }
+
+        .nav-menu {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            cursor: none;
+        }
+
+        .nav-menu span {
+            display: block;
+            background: var(--white);
+            height: 1px;
+            transition: width 0.3s;
+        }
+
+        .nav-menu span:nth-child(1) {
+            width: 28px;
+        }
+
+        .nav-menu span:nth-child(2) {
+            width: 18px;
+        }
+
+        .nav-menu span:nth-child(3) {
+            width: 24px;
+        }
+
+        /* HERO */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            overflow: hidden;
+        }
+
+        .hero-left {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 0 60px 80px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-eyebrow {
+            font-size: 10px;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .hero-eyebrow::before {
+            content: '';
+            display: block;
+            width: 40px;
+            height: 1px;
+            background: var(--accent);
+        }
+
+        .hero-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(72px, 9vw, 130px);
+            line-height: 0.92;
+            letter-spacing: 0.02em;
+            color: var(--white);
+            margin-bottom: 32px;
+        }
+
+        .hero-subtitle {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
+            font-style: italic;
+            color: var(--light-gray);
+            line-height: 1.8;
+            max-width: 320px;
+            margin-bottom: 48px;
+        }
+
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 14px 32px;
+            font-size: 11px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.4s;
+            cursor: none;
+            background: transparent;
+            width: fit-content;
+        }
+
+        .btn-primary:hover {
+            background: var(--white);
+            color: var(--black);
+            border-color: var(--white);
+        }
+
+        .btn-primary::after {
+            content: '→';
+            transition: transform 0.3s;
+        }
+
+        .btn-primary:hover::after {
+            transform: translateX(6px);
+        }
+
+        .hero-right {
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* SVG Model placeholder */
+        .hero-model {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-scroll-hint {
+            position: absolute;
+            bottom: 40px;
+            left: 60px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 10px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--mid-gray);
+            z-index: 3;
+        }
+
+        .scroll-line {
+            width: 48px;
+            height: 1px;
+            background: var(--mid-gray);
+            animation: scrollPulse 2s infinite;
+        }
+
+        @keyframes scrollPulse {
+
+            0%,
+            100% {
+                transform: scaleX(1);
+            }
+
+            50% {
+                transform: scaleX(0.5);
+                transform-origin: left;
+            }
+        }
+
+        /* SECTION BASE */
+        section {
+            padding: 120px 60px;
+            position: relative;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 64px;
+        }
+
+        .section-label {
+            font-size: 10px;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .section-line {
+            flex: 1;
+            height: 1px;
+            background: var(--dark-gray);
+        }
+
+        .section-number {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 11px;
+            color: var(--dark-gray);
+        }
+
+        .section-title-lg {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: clamp(48px, 6vw, 80px);
+            letter-spacing: 0.05em;
+            color: var(--white);
+            line-height: 1;
+        }
+
+        /* CATALOGUE */
+        #catalogue {
+            background: var(--near-black);
+        }
+
+        .catalogue-intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: end;
+            margin-bottom: 80px;
+        }
+
+        .catalogue-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 13px;
+            font-style: italic;
+            color: var(--light-gray);
+            line-height: 2;
+            padding-left: 24px;
+            border-left: 1px solid var(--accent);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2px;
+        }
+
+        .product-card {
+            position: relative;
+            background: var(--charcoal);
+            overflow: hidden;
+            cursor: none;
+        }
+
+        .product-card:first-child {
+            grid-row: span 2;
+        }
+
+        .product-visual {
+            width: 100%;
+            aspect-ratio: 3/4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-card:first-child .product-visual {
+            aspect-ratio: auto;
+            height: 100%;
+            min-height: 560px;
+        }
+
+        .product-card:hover .product-overlay {
+            opacity: 1;
+        }
+
+        .product-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(10, 10, 10, 0.7);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .product-overlay span {
+            font-size: 10px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--white);
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            padding: 10px 24px;
+        }
+
+        .product-info {
+            padding: 20px 24px;
+            border-top: 1px solid var(--dark-gray);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .product-name {
+            font-size: 12px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--silver);
+        }
+
+        .product-price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 16px;
+            color: var(--accent);
+        }
+
+        /* Details row */
+        .product-details-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            margin-top: 2px;
+        }
+
+        .detail-card {
+            background: var(--charcoal);
+            padding: 32px 24px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .detail-card-label {
+            font-size: 9px;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--mid-gray);
+            margin-bottom: 16px;
+        }
+
+        .detail-card-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            color: var(--white);
+            font-weight: 300;
+        }
+
+        /* ACCESSORIES */
+        #accessories {
+            background: var(--black);
+        }
+
+        .accessories-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .accessories-left .section-title-lg {
+            margin-bottom: 32px;
+        }
+
+        .accessories-desc {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 18px;
+            font-style: italic;
+            color: var(--light-gray);
+            line-height: 1.9;
+            margin-bottom: 48px;
+        }
+
+        .acc-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2px;
+        }
+
+        .acc-card {
+            background: var(--charcoal);
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            cursor: none;
+        }
+
+        .acc-visual {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 32px;
+        }
+
+        .acc-label {
+            padding: 16px 20px;
+            border-top: 1px solid var(--dark-gray);
+            font-size: 10px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--mid-gray);
+        }
+
+        .acc-card:hover .acc-label {
+            color: var(--accent);
+        }
+
+        /* FEATURES */
+        .features-strip {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            border-top: 1px solid var(--dark-gray);
+            border-bottom: 1px solid var(--dark-gray);
+            margin: 80px 0;
+        }
+
+        .feature-item {
+            padding: 32px 0;
+            border-right: 1px solid var(--dark-gray);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .feature-item:last-child {
+            border-right: none;
+        }
+
+        .feature-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .feature-name {
+            font-size: 10px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--silver);
+            text-align: center;
+        }
+
+        .feature-desc {
+            font-size: 11px;
+            color: var(--mid-gray);
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        /* PACKAGING */
+        #packaging {
+            background: var(--near-black);
+        }
+
+        .packaging-hero {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 2px;
+            margin-bottom: 2px;
+        }
+
+        .pack-main {
+            background: var(--charcoal);
+            min-height: 480px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pack-main-label {
+            position: absolute;
+            bottom: 32px;
+            left: 32px;
+            font-size: 10px;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--mid-gray);
+        }
+
+        .pack-info {
+            background: var(--black);
+            padding: 48px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .pack-info-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 36px;
+            font-weight: 300;
+            line-height: 1.3;
+            color: var(--white);
+            margin-bottom: 24px;
+        }
+
+        .pack-info-body {
+            font-size: 13px;
+            color: var(--light-gray);
+            line-height: 2;
+            margin-bottom: 40px;
+        }
+
+        .pack-features {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .pack-features li {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--silver);
+        }
+
+        .pack-features li::before {
+            content: '●';
+            color: var(--accent);
+            font-size: 6px;
+        }
+
+        .packaging-row {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+        }
+
+        .pack-thumb {
+            background: var(--charcoal);
+            aspect-ratio: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            cursor: none;
+        }
+
+        .pack-thumb-visual {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .pack-thumb-label {
+            padding: 14px 18px;
+            border-top: 1px solid var(--dark-gray);
+            font-size: 9px;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: var(--mid-gray);
+        }
+
+        /* BRAND STORY */
+        #brand-story {
+            background: var(--black);
+            padding: 160px 60px;
+        }
+
+        .story-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 120px;
+            align-items: center;
+        }
+
+        .story-text .section-label {
+            display: block;
+            margin-bottom: 32px;
+        }
+
+        .story-heading {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(36px, 4vw, 56px);
+            font-weight: 300;
+            line-height: 1.25;
+            color: var(--white);
+            margin-bottom: 40px;
+        }
+
+        .story-heading em {
+            font-style: italic;
+            color: var(--accent);
+        }
+
+        .story-body {
+            font-size: 14px;
+            color: var(--light-gray);
+            line-height: 2.2;
+            margin-bottom: 24px;
+        }
+
+        .story-sig {
+            margin-top: 48px;
+            padding-top: 32px;
+            border-top: 1px solid var(--dark-gray);
+        }
+
+        .story-sig-name {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 22px;
+            font-style: italic;
+            color: var(--white);
+        }
+
+        .story-sig-sub {
+            font-size: 10px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--mid-gray);
+            margin-top: 4px;
+        }
+
+        .story-visual {
+            position: relative;
+        }
+
+        .story-image-frame {
+            background: var(--charcoal);
+            aspect-ratio: 3/4;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .story-image-frame::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            right: -20px;
+            bottom: -20px;
+            border: 1px solid var(--dark-gray);
+            z-index: 0;
+        }
+
+        /* MOODBOARD */
+        #moodboard {
+            background: var(--near-black);
+        }
+
+        .moodboard-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(3, 180px);
+            gap: 2px;
+            margin-top: 64px;
+        }
+
+        .mood-cell {
+            background: var(--charcoal);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .mood-cell.large {
+            grid-column: span 2;
+            grid-row: span 2;
+        }
+
+        .mood-cell.tall {
+            grid-row: span 2;
+        }
+
+        .mood-cell.wide {
+            grid-column: span 2;
+        }
+
+        .mood-text-cell {
+            background: var(--black);
+            padding: 32px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .mood-quote {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 20px;
+            font-style: italic;
+            font-weight: 300;
+            color: var(--white);
+            line-height: 1.6;
+        }
+
+        .mood-quote-attr {
+            font-size: 10px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--mid-gray);
+            margin-top: 16px;
+        }
+
+        .palette-cell {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .palette-swatch {
+            height: 100%;
+        }
+
+        /* FOOTER */
+        footer {
+            background: var(--black);
+            border-top: 1px solid var(--dark-gray);
+            padding: 80px 60px 40px;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 80px;
+        }
+
+        .footer-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 28px;
+            font-weight: 300;
+            letter-spacing: 0.3em;
+            color: var(--white);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+        }
+
+        .footer-brand span {
+            color: var(--accent);
+            font-style: italic;
+        }
+
+        .footer-tagline {
+            font-size: 12px;
+            color: var(--mid-gray);
+            line-height: 2;
+            max-width: 260px;
+        }
+
+        .footer-col-title {
+            font-size: 10px;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--accent);
+            margin-bottom: 24px;
+        }
+
+        .footer-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .footer-links a {
+            font-size: 13px;
+            color: var(--mid-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+            letter-spacing: 0.05em;
+        }
+
+        .footer-links a:hover {
+            color: var(--white);
+        }
+
+        .footer-bottom {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 32px;
+            border-top: 1px solid var(--dark-gray);
+        }
+
+        .footer-copy {
+            font-size: 11px;
+            color: var(--dark-gray);
+            letter-spacing: 0.2em;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 24px;
+        }
+
+        .footer-socials a {
+            font-size: 10px;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: var(--mid-gray);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-socials a:hover {
+            color: var(--white);
+        }
+
+        /* SVG Generated Art */
+        .gen-model {
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Grain overlay */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0.025;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+        }
+
+        /* SVG illustrations */
+        .svg-tshirt {
+            filter: drop-shadow(0 20px 60px rgba(0, 0, 0, 0.8));
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- NAV -->
+    <nav>
+        <a href="#" class="nav-logo">H<span>idden</span> Genesis</a>
+        <ul class="nav-links">
+            <li><a href="#catalogue">Catalogue</a></li>
+            <li><a href="#accessories">Accessories</a></li>
+            <li><a href="#packaging">Packaging</a></li>
+            <li><a href="#brand-story">Story</a></li>
+        </ul>
+        <div class="nav-menu">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" style="padding:0;">
+        <div class="hero-left">
+            <div class="hero-eyebrow">Fashion Streetwear</div>
+            <h1 class="hero-title">HIDDEN<br>GENESIS</h1>
+            <p class="hero-subtitle">Born from the quiet spaces between thoughts. Worn by those who speak through
+                presence, not noise.</p>
+            <a href="#catalogue" class="btn-primary">Explore Collection</a>
+            <div class="hero-scroll-hint">
+                <div class="scroll-line"></div>
+                <span>Scroll</span>
+            </div>
+        </div>
+        <div class="hero-right">
+            <svg class="gen-model" viewBox="0 0 700 900" xmlns="http://www.w3.org/2000/svg"
+                preserveAspectRatio="xMidYMid slice">
+                <!-- Background atmosphere -->
+                <rect width="700" height="900" fill="#0d0d0d" />
+                <!-- Subtle light gradient from upper right -->
+                <radialGradient id="heroLight" cx="80%" cy="25%" r="55%">
+                    <stop offset="0%" stop-color="#2a2a2a" />
+                    <stop offset="100%" stop-color="#0a0a0a" />
+                </radialGradient>
+                <rect width="700" height="900" fill="url(#heroLight)" />
+
+                <!-- Floor reflection subtle -->
+                <rect x="0" y="760" width="700" height="140" fill="#111" />
+                <rect x="0" y="758" width="700" height="2" fill="#222" opacity="0.5" />
+
+                <!-- Model figure - sitting pose, loose oversized clothing -->
+                <!-- Chair/stool base -->
+                <ellipse cx="380" cy="800" rx="60" ry="12" fill="#1a1a1a" />
+                <rect x="350" y="690" width="10" height="115" fill="#1c1c1c" />
+                <rect x="390" y="690" width="10" height="115" fill="#1c1c1c" />
+                <ellipse cx="375" cy="690" rx="50" ry="10" fill="#222" />
+
+                <!-- Legs (oversized pants, dark) -->
+                <path d="M310 680 Q295 720 285 780 Q290 785 305 782 Q315 730 330 690Z" fill="#151515" />
+                <path d="M440 680 Q455 720 465 775 Q450 780 440 778 Q430 730 415 690Z" fill="#151515" />
+
+                <!-- Shoes -->
+                <ellipse cx="293" cy="782" rx="28" ry="10" fill="#111" transform="rotate(-5,293,782)" />
+                <rect x="268" y="774" width="50" height="14" rx="4" fill="#1a1a1a" transform="rotate(-5,293,782)" />
+                <rect x="268" y="774" width="50" height="6" rx="3" fill="#222" transform="rotate(-5,293,782)" />
+
+                <ellipse cx="453" cy="778" rx="28" ry="10" fill="#111" transform="rotate(5,453,778)" />
+                <rect x="428" y="770" width="50" height="14" rx="4" fill="#1a1a1a" transform="rotate(5,453,778)" />
+                <rect x="428" y="770" width="50" height="6" rx="3" fill="#222" transform="rotate(5,453,778)" />
+
+                <!-- Oversized tshirt body - relaxed fit -->
+                <path
+                    d="M290 440 Q270 460 265 500 Q262 560 265 640 Q270 670 290 680 L460 680 Q480 670 485 640 Q488 560 485 500 Q480 460 460 440 Z"
+                    fill="#181818" />
+                <!-- Shirt wrinkles/shadows -->
+                <path d="M310 480 Q315 540 310 600" stroke="#111" stroke-width="1.5" fill="none" opacity="0.8" />
+                <path d="M380 490 Q382 550 378 610" stroke="#111" stroke-width="1.5" fill="none" opacity="0.6" />
+                <path d="M440 475 Q438 530 442 590" stroke="#111" stroke-width="1.5" fill="none" opacity="0.7" />
+
+                <!-- Shirt collar area -->
+                <path d="M340 440 Q360 455 380 440 Q380 420 360 418 Q340 420 340 440Z" fill="#141414" />
+
+                <!-- Small HG logo on chest -->
+                <text x="418" y="520" font-family="serif" font-size="9" fill="#333" letter-spacing="1"
+                    text-anchor="middle">HG</text>
+
+                <!-- Left sleeve -->
+                <path d="M265 440 Q240 445 228 480 Q222 500 230 515 Q238 530 252 525 Q265 500 280 480 Q275 460 265 440Z"
+                    fill="#181818" />
+                <!-- Right sleeve -->
+                <path d="M485 440 Q510 445 522 480 Q528 500 520 515 Q512 530 498 525 Q485 500 470 480 Q475 460 485 440Z"
+                    fill="#181818" />
+
+                <!-- Neck -->
+                <rect x="348" y="395" width="54" height="50" rx="8" fill="#2a2016" opacity="0.9" />
+
+                <!-- Head -->
+                <ellipse cx="375" cy="350" rx="55" ry="65" fill="#2a1f14" />
+                <!-- Hair -->
+                <path d="M320 330 Q325 275 375 265 Q425 275 430 330 Q420 295 375 290 Q330 295 320 330Z" fill="#111" />
+                <path d="M320 330 Q318 310 325 295 Q335 280 355 272" stroke="#111" stroke-width="8" fill="none"
+                    stroke-linecap="round" />
+                <path d="M430 330 Q432 308 424 292 Q414 278 394 271" stroke="#111" stroke-width="8" fill="none"
+                    stroke-linecap="round" />
+                <!-- Additional hair texture -->
+                <path d="M335 295 Q345 272 375 268 Q405 272 415 295" stroke="#1a1a1a" stroke-width="5" fill="none" />
+
+                <!-- Face features - looking slightly right -->
+                <ellipse cx="358" cy="355" rx="8" ry="9" fill="#1e150b" opacity="0.7" />
+                <ellipse cx="393" cy="355" rx="8" ry="9" fill="#1e150b" opacity="0.7" />
+                <!-- Eyebrows -->
+                <path d="M347 342 Q358 338 370 341" stroke="#1a1008" stroke-width="2.5" fill="none"
+                    stroke-linecap="round" />
+                <path d="M382 341 Q393 337 403 341" stroke="#1a1008" stroke-width="2.5" fill="none"
+                    stroke-linecap="round" />
+                <!-- Nose -->
+                <path d="M372 358 Q368 372 362 378 Q370 382 382 378 Q376 372 372 358Z" fill="#1e130a" opacity="0.5" />
+                <!-- Subtle mouth -->
+                <path d="M362 390 Q372 395 382 390" stroke="#1a100a" stroke-width="2" fill="none" stroke-linecap="round"
+                    opacity="0.8" />
+
+                <!-- Watch on right wrist -->
+                <rect x="488" y="516" width="24" height="18" rx="4" fill="#222" />
+                <rect x="490" y="518" width="20" height="14" rx="3" fill="#1a1a1a" />
+                <rect x="491" y="519" width="18" height="12" rx="2" fill="#111" />
+                <line x1="500" y1="520" x2="500" y2="530" stroke="#333" stroke-width="0.8" />
+                <line x1="494" y1="525" x2="506" y2="525" stroke="#333" stroke-width="0.8" />
+
+                <!-- Side table/cup -->
+                <rect x="490" y="680" width="60" height="60" rx="4" fill="#161616" />
+                <!-- Cup on table -->
+                <rect x="504" y="650" width="28" height="36" rx="3" fill="#1a1a1a" />
+                <rect x="504" y="650" width="28" height="10" rx="3" fill="#222" />
+                <text x="518" y="673" font-family="serif" font-size="5" fill="#333" text-anchor="middle"
+                    letter-spacing="0.5">HG</text>
+
+                <!-- Plant background suggestion -->
+                <line x1="580" y1="900" x2="580" y2="400" stroke="#1a1a1a" stroke-width="4" />
+                <ellipse cx="580" cy="400" rx="3" ry="25" fill="#1c1c1c" transform="rotate(-30,580,400)" />
+                <ellipse cx="560" cy="430" rx="60" ry="18" fill="#161616" transform="rotate(-40,560,430)" />
+                <ellipse cx="600" cy="450" rx="55" ry="15" fill="#181818" transform="rotate(35,600,450)" />
+                <ellipse cx="550" cy="480" rx="50" ry="14" fill="#141414" transform="rotate(-55,550,480)" />
+                <ellipse cx="610" cy="500" rx="48" ry="13" fill="#161616" transform="rotate(50,610,500)" />
+                <ellipse cx="560" cy="530" rx="42" ry="12" fill="#121212" transform="rotate(-45,560,530)" />
+
+                <!-- Brand watermark subtle -->
+                <text x="35" y="870" font-family="serif" font-size="11" fill="#1e1e1e" letter-spacing="8"
+                    opacity="0.8">HIDDEN GENESIS</text>
+                <text x="35" y="886" font-family="sans-serif" font-size="7" fill="#1a1a1a" letter-spacing="5">BORN FROM
+                    SILENCE</text>
+
+                <!-- Corner detail -->
+                <rect x="640" y="40" width="20" height="1" fill="#2a2a2a" />
+                <rect x="659" y="40" width="1" height="20" fill="#2a2a2a" />
+            </svg>
+        </div>
+    </section>
+
+    <!-- CATALOGUE -->
+    <section id="catalogue">
+        <div class="section-header">
+            <span class="section-label">Product Catalogue</span>
+            <div class="section-line"></div>
+            <span class="section-number">01</span>
+        </div>
+
+        <div class="catalogue-intro reveal">
+            <h2 class="section-title-lg">THE CORE<br>COLLECTION</h2>
+            <p class="catalogue-quote">
+                "Fabric that moves like silence.<br>
+                Cut to disappear into the crowd,<br>
+                yet impossible to ignore."<br>
+                <br>
+                — Hidden Genesis, SS 2026
+            </p>
+        </div>
+
+        <div class="product-grid">
+            <!-- Featured product -->
+            <div class="product-card">
+                <div class="product-visual">
+                    <svg viewBox="0 0 400 560" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+                        <rect width="400" height="560" fill="#1a1a1a" />
+                        <radialGradient id="p1light" cx="50%" cy="30%" r="60%">
+                            <stop offset="0%" stop-color="#282828" />
+                            <stop offset="100%" stop-color="#111" />
+                        </radialGradient>
+                        <rect width="400" height="560" fill="url(#p1light)" />
+                        <!-- Model back with print -->
+                        <path
+                            d="M130 140 Q120 155 118 200 Q115 270 118 340 Q120 365 135 375 L265 375 Q280 365 282 340 Q285 270 282 200 Q280 155 270 140Z"
+                            fill="#161616" />
+                        <!-- Back print text -->
+                        <text x="200" y="230" font-family="serif" font-size="11" fill="#2a2a2a" text-anchor="middle"
+                            letter-spacing="1">NOT EVERYTHING</text>
+                        <text x="200" y="248" font-family="serif" font-size="11" fill="#2a2a2a" text-anchor="middle"
+                            letter-spacing="1">NEEDS A REACTION</text>
+                        <line x1="175" y1="256" x2="225" y2="256" stroke="#2a2a2a" stroke-width="0.8" />
+                        <!-- Sleeve -->
+                        <path d="M118 140 Q100 148 93 178 Q89 195 96 208 Q105 220 118 215 Q128 190 138 165Z"
+                            fill="#161616" />
+                        <path d="M282 140 Q300 148 307 178 Q311 195 304 208 Q295 220 282 215 Q272 190 262 165Z"
+                            fill="#161616" />
+                        <!-- Collar -->
+                        <path d="M165 140 Q185 152 200 140 Q185 125 168 128Z" fill="#141414" />
+                        <!-- Logo small back -->
+                        <text x="200" y="355" font-family="serif" font-size="8" fill="#252525" text-anchor="middle"
+                            letter-spacing="2">HG</text>
+                        <!-- Shadow base -->
+                        <ellipse cx="200" cy="500" rx="100" ry="20" fill="#111" opacity="0.6" />
+                    </svg>
+                    <div class="product-overlay"><span>Quick View</span></div>
+                </div>
+                <div class="product-info">
+                    <span class="product-name">Oversized Silence Tee</span>
+                    <span class="product-price">Rp 395.000</span>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card">
+                <div class="product-visual">
+                    <svg viewBox="0 0 300 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+                        <rect width="300" height="380" fill="#1c1c1c" />
+                        <!-- Front view shirt -->
+                        <path
+                            d="M90 95 Q80 108 78 145 Q75 200 78 255 Q80 275 92 283 L208 283 Q220 275 222 255 Q225 200 222 145 Q220 108 210 95Z"
+                            fill="#141414" />
+                        <!-- Front minimal dot detail -->
+                        <circle cx="175" cy="155" r="3" fill="#252525" />
+                        <!-- Collar -->
+                        <path d="M125 95 Q148 108 150 95 Q135 82 118 85Z" fill="#111" />
+                        <!-- Hem label area -->
+                        <rect x="138" y="268" width="24" height="12" rx="2" fill="#1a1a1a" />
+                        <text x="150" y="277" font-family="serif" font-size="5" fill="#2a2a2a" text-anchor="middle"
+                            letter-spacing="0.5">HG</text>
+                        <!-- Sleeve -->
+                        <path d="M78 95 Q60 102 55 128 Q52 142 58 153 Q66 163 78 158 Q86 135 96 112Z" fill="#141414" />
+                        <path d="M222 95 Q240 102 245 128 Q248 142 242 153 Q234 163 222 158 Q214 135 204 112Z"
+                            fill="#141414" />
+                        <ellipse cx="150" cy="340" rx="75" ry="12" fill="#131313" opacity="0.5" />
+                    </svg>
+                    <div class="product-overlay"><span>Quick View</span></div>
+                </div>
+                <div class="product-info">
+                    <span class="product-name">Front Minimal Tee</span>
+                    <span class="product-price">Rp 375.000</span>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card">
+                <div class="product-visual">
+                    <svg viewBox="0 0 300 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+                        <rect width="300" height="380" fill="#181818" />
+                        <!-- Wide leg pants -->
+                        <path d="M90 50 L210 50 L220 200 L175 200 L150 320 L125 200 L80 200 Z" fill="#141414" />
+                        <!-- Waistband -->
+                        <rect x="88" y="48" width="124" height="20" rx="3" fill="#1c1c1c" />
+                        <!-- Leg seams -->
+                        <line x1="150" y1="200" x2="155" y2="320" stroke="#111" stroke-width="1" opacity="0.8" />
+                        <line x1="150" y1="200" x2="145" y2="320" stroke="#111" stroke-width="1" opacity="0.8" />
+                        <!-- Pockets suggestion -->
+                        <path d="M90 80 Q85 100 88 118" stroke="#111" stroke-width="1.5" fill="none" />
+                        <path d="M210 80 Q215 100 212 118" stroke="#111" stroke-width="1.5" fill="none" />
+                        <ellipse cx="150" cy="350" rx="85" ry="10" fill="#111" opacity="0.4" />
+                    </svg>
+                    <div class="product-overlay"><span>Quick View</span></div>
+                </div>
+                <div class="product-info">
+                    <span class="product-name">Wide Leg Cargo</span>
+                    <span class="product-price">Rp 520.000</span>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card">
+                <div class="product-visual">
+                    <svg viewBox="0 0 300 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+                        <rect width="300" height="380" fill="#161616" />
+                        <!-- Hoodie -->
+                        <path
+                            d="M75 110 Q65 125 62 175 Q58 240 62 295 Q65 320 80 328 L220 328 Q235 320 238 295 Q242 240 238 175 Q235 125 225 110Z"
+                            fill="#131313" />
+                        <!-- Hood -->
+                        <path d="M100 110 Q105 85 150 75 Q195 85 200 110 Q180 98 150 95 Q120 98 100 110Z"
+                            fill="#131313" />
+                        <!-- Center seam / zipper -->
+                        <line x1="150" y1="115" x2="150" y2="325" stroke="#1a1a1a" stroke-width="2" />
+                        <!-- Sleeve -->
+                        <path d="M62 115 Q40 122 34 158 Q30 178 38 192 Q48 205 62 198 Q72 168 85 138Z" fill="#131313" />
+                        <path d="M238 115 Q260 122 266 158 Q270 178 262 192 Q252 205 238 198 Q228 168 215 138Z"
+                            fill="#131313" />
+                        <!-- Front pocket -->
+                        <path d="M110 220 Q110 250 115 260 L185 260 Q190 250 190 220 Z" fill="#161616" stroke="#1a1a1a"
+                            stroke-width="1" />
+                        <!-- HG print on chest -->
+                        <text x="150" y="165" font-family="serif" font-size="14" fill="#1e1e1e" text-anchor="middle"
+                            letter-spacing="3">HG</text>
+                        <ellipse cx="150" cy="350" rx="85" ry="10" fill="#111" opacity="0.4" />
+                    </svg>
+                    <div class="product-overlay"><span>Quick View</span></div>
+                </div>
+                <div class="product-info">
+                    <span class="product-name">Phantom Hoodie</span>
+                    <span class="product-price">Rp 650.000</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product detail cards -->
+        <div class="product-details-row" style="margin-top: 2px;">
+            <div class="detail-card reveal">
+                <div class="detail-card-label">Material</div>
+                <div class="detail-card-title">Premium<br>Cotton 24S</div>
+            </div>
+            <div class="detail-card reveal" style="transition-delay:0.1s">
+                <div class="detail-card-label">Silhouette</div>
+                <div class="detail-card-title">Oversize<br>Fit</div>
+            </div>
+            <div class="detail-card reveal" style="transition-delay:0.2s">
+                <div class="detail-card-label">Print Method</div>
+                <div class="detail-card-title">High Quality<br>DTG Print</div>
+            </div>
+            <div class="detail-card reveal" style="transition-delay:0.3s">
+                <div class="detail-card-label">Availability</div>
+                <div class="detail-card-title">Limited<br>Edition</div>
+            </div>
+        </div>
+
+        <!-- Features strip -->
+        <div class="features-strip reveal">
+            <div class="feature-item">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="16" cy="16" r="13" stroke="#555" stroke-width="1" />
+                    <path d="M10 16 Q16 8 22 16 Q16 24 10 16Z" fill="none" stroke="#888" stroke-width="1.5" />
+                    <circle cx="16" cy="16" r="3" fill="#666" />
+                </svg>
+                <div class="feature-name">Premium Cotton 24S</div>
+                <div class="feature-desc">Ultra-soft heavyweight cotton for lasting comfort</div>
+            </div>
+            <div class="feature-item">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="6" y="6" width="20" height="22" rx="2" stroke="#555" stroke-width="1" />
+                    <line x1="10" y1="12" x2="22" y2="12" stroke="#666" stroke-width="1" />
+                    <line x1="10" y1="16" x2="22" y2="16" stroke="#555" stroke-width="1" />
+                    <line x1="10" y1="20" x2="18" y2="20" stroke="#444" stroke-width="1" />
+                </svg>
+                <div class="feature-name">Oversize Fit</div>
+                <div class="feature-desc">Silhouette crafted for unrestricted movement</div>
+            </div>
+            <div class="feature-item">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect x="7" y="7" width="18" height="18" rx="2" stroke="#555" stroke-width="1" />
+                    <path d="M11 19 L15 14 L18 17 L21 13" stroke="#777" stroke-width="1.5" fill="none"
+                        stroke-linecap="round" />
+                </svg>
+                <div class="feature-name">High Quality Print</div>
+                <div class="feature-desc">Fade-resistant screen printing technique</div>
+            </div>
+            <div class="feature-item">
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16 5 L18 11 L24 11 L19 15 L21 21 L16 17 L11 21 L13 15 L8 11 L14 11Z" stroke="#666"
+                        stroke-width="1" fill="none" />
+                </svg>
+                <div class="feature-name">Limited Edition</div>
+                <div class="feature-desc">Each drop, numbered and finite</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ACCESSORIES -->
+    <section id="accessories">
+        <div class="section-header">
+            <span class="section-label">Accessories</span>
+            <div class="section-line"></div>
+            <span class="section-number">02</span>
+        </div>
+
+        <div class="accessories-layout">
+            <div class="accessories-left reveal">
+                <h2 class="section-title-lg">COMPLETE<br>THE LOOK</h2>
+                <p class="accessories-desc">
+                    Each accessory carries the same silence.<br>
+                    The same intention. The same restraint.
+                </p>
+                <a href="#" class="btn-primary">View All Accessories</a>
+            </div>
+
+            <div class="acc-grid reveal">
+                <!-- Cap -->
+                <div class="acc-card">
+                    <div class="acc-visual">
+                        <svg viewBox="0 0 180 160" xmlns="http://www.w3.org/2000/svg" style="width:140px;height:120px">
+                            <ellipse cx="90" cy="110" rx="78" ry="20" fill="#111" />
+                            <!-- Cap body -->
+                            <path d="M30 100 Q30 50 90 45 Q150 50 150 100 Z" fill="#1a1a1a" />
+                            <!-- Brim -->
+                            <path d="M20 105 Q90 115 160 105 Q155 112 90 118 Q25 112 20 105Z" fill="#151515" />
+                            <!-- Front panel seam -->
+                            <line x1="90" y1="48" x2="90" y2="100" stroke="#222" stroke-width="1" />
+                            <!-- HG embroidery -->
+                            <text x="90" y="82" font-family="serif" font-size="12" fill="#252525" text-anchor="middle"
+                                letter-spacing="2">HG</text>
+                            <!-- Strap back suggestion -->
+                            <rect x="78" y="98" width="24" height="6" rx="2" fill="#161616" />
+                        </svg>
+                    </div>
+                    <div class="acc-label">Signature Cap</div>
+                </div>
+
+                <!-- Tote Bag -->
+                <div class="acc-card">
+                    <div class="acc-visual">
+                        <svg viewBox="0 0 160 180" xmlns="http://www.w3.org/2000/svg" style="width:120px;height:140px">
+                            <!-- Handles -->
+                            <path d="M55 60 Q55 30 80 25 Q105 30 105 60" stroke="#2a2a2a" stroke-width="5" fill="none"
+                                stroke-linecap="round" />
+                            <!-- Bag body -->
+                            <rect x="30" y="58" width="100" height="110" rx="4" fill="#181818" />
+                            <!-- Bag flap/shadow -->
+                            <rect x="30" y="58" width="100" height="18" rx="4" fill="#1c1c1c" />
+                            <!-- Logo center -->
+                            <text x="80" y="122" font-family="serif" font-size="13" fill="#252525" text-anchor="middle"
+                                letter-spacing="2">HG</text>
+                            <text x="80" y="138" font-family="sans-serif" font-size="6" fill="#202020"
+                                text-anchor="middle" letter-spacing="2">HIDDEN GENESIS</text>
+                            <!-- Base shadow -->
+                            <ellipse cx="80" cy="172" rx="50" ry="8" fill="#111" opacity="0.6" />
+                        </svg>
+                    </div>
+                    <div class="acc-label">Canvas Tote</div>
+                </div>
+
+                <!-- Socks -->
+                <div class="acc-card">
+                    <div class="acc-visual">
+                        <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" style="width:130px;height:130px">
+                            <!-- Sock 1 -->
+                            <path
+                                d="M50 30 Q44 30 42 40 L38 110 Q36 130 55 138 Q72 144 82 130 Q90 118 78 108 L74 85 L86 80 L80 38 Q78 30 70 30 Z"
+                                fill="#1a1a1a" />
+                            <!-- Sock cuff stripes -->
+                            <rect x="44" y="30" width="34" height="4" rx="1" fill="#222" />
+                            <rect x="44" y="36" width="34" height="2" rx="1" fill="#1e1e1e" />
+                            <!-- Logo on cuff -->
+                            <text x="61" y="44" font-family="serif" font-size="7" fill="#2a2a2a" text-anchor="middle"
+                                letter-spacing="1">HG</text>
+                            <!-- Sock 2 slightly offset -->
+                            <path
+                                d="M85 38 Q79 38 77 48 L73 112 Q71 132 90 140 Q107 146 117 132 Q125 120 113 110 L109 87 L121 82 L115 46 Q113 38 105 38 Z"
+                                fill="#161616" />
+                            <rect x="79" y="38" width="34" height="4" rx="1" fill="#1c1c1c" />
+                        </svg>
+                    </div>
+                    <div class="acc-label">Logo Socks</div>
+                </div>
+
+                <!-- Keychain/tag -->
+                <div class="acc-card">
+                    <div class="acc-visual">
+                        <svg viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg" style="width:130px;height:130px">
+                            <!-- Chain -->
+                            <circle cx="80" cy="28" r="8" fill="none" stroke="#2a2a2a" stroke-width="2" />
+                            <line x1="80" y1="36" x2="80" y2="55" stroke="#222" stroke-width="2" />
+                            <!-- Tag body -->
+                            <rect x="54" y="55" width="52" height="72" rx="6" fill="#1a1a1a" />
+                            <!-- Top hole -->
+                            <circle cx="80" cy="63" r="5" fill="#141414" />
+                            <!-- Tag content -->
+                            <text x="80" y="98" font-family="serif" font-size="14" fill="#2a2a2a" text-anchor="middle"
+                                letter-spacing="2">HG</text>
+                            <line x1="64" y1="106" x2="96" y2="106" stroke="#222" stroke-width="0.8" />
+                            <text x="80" y="116" font-family="sans-serif" font-size="5" fill="#1e1e1e"
+                                text-anchor="middle" letter-spacing="1.5">HIDDEN GENESIS</text>
+                            <!-- Subtle shadow -->
+                            <ellipse cx="80" cy="132" rx="30" ry="5" fill="#111" opacity="0.5" />
+                        </svg>
+                    </div>
+                    <div class="acc-label">Brand Keychain</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Accessories extra row -->
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-top:2px;" class="reveal">
+            <!-- Lanyard -->
+            <div class="acc-card"
+                style="aspect-ratio:2/1;flex-direction:row;align-items:center;padding:32px 40px;gap:32px;">
+                <svg viewBox="0 0 80 100" xmlns="http://www.w3.org/2000/svg"
+                    style="width:60px;height:80px;flex-shrink:0">
+                    <path d="M40 5 Q25 20 20 50 Q18 65 22 75" stroke="#2a2a2a" stroke-width="3" fill="none" />
+                    <path d="M40 5 Q55 20 60 50 Q62 65 58 75" stroke="#2a2a2a" stroke-width="3" fill="none" />
+                    <rect x="20" y="72" width="40" height="22" rx="3" fill="#1a1a1a" />
+                    <text x="40" y="87" font-family="serif" font-size="7" fill="#2a2a2a" text-anchor="middle"
+                        letter-spacing="1">HG</text>
+                </svg>
+                <div>
+                    <div class="acc-label" style="margin-bottom:8px;">Branded Lanyard</div>
+                    <div style="font-size:12px;color:var(--dark-gray);">One size — all colorways</div>
+                </div>
+            </div>
+
+            <!-- Sticker set -->
+            <div class="acc-card"
+                style="aspect-ratio:2/1;flex-direction:row;align-items:center;padding:32px 40px;gap:32px;">
+                <svg viewBox="0 0 100 80" xmlns="http://www.w3.org/2000/svg"
+                    style="width:80px;height:60px;flex-shrink:0">
+                    <rect x="5" y="10" width="40" height="55" rx="4" fill="#1a1a1a" />
+                    <text x="25" y="42" font-family="serif" font-size="10" fill="#2a2a2a" text-anchor="middle"
+                        letter-spacing="1">HG</text>
+                    <rect x="52" y="18" width="42" height="42" rx="21" fill="#1c1c1c" />
+                    <text x="73" y="44" font-family="serif" font-size="10" fill="#252525" text-anchor="middle">HG</text>
+                </svg>
+                <div>
+                    <div class="acc-label" style="margin-bottom:8px;">Sticker Pack</div>
+                    <div style="font-size:12px;color:var(--dark-gray);">6 pcs per set</div>
+                </div>
+            </div>
+
+            <!-- Wristband -->
+            <div class="acc-card"
+                style="aspect-ratio:2/1;flex-direction:row;align-items:center;padding:32px 40px;gap:32px;">
+                <svg viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg"
+                    style="width:80px;height:48px;flex-shrink:0">
+                    <path d="M10 30 Q10 10 50 10 Q90 10 90 30 Q90 50 50 50 Q10 50 10 30Z" fill="none" stroke="#1e1e1e"
+                        stroke-width="10" />
+                    <text x="50" y="34" font-family="serif" font-size="9" fill="#2a2a2a" text-anchor="middle"
+                        letter-spacing="2">HG</text>
+                </svg>
+                <div>
+                    <div class="acc-label" style="margin-bottom:8px;">Silicone Wristband</div>
+                    <div style="font-size:12px;color:var(--dark-gray);">Matte black finish</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PACKAGING -->
+    <section id="packaging">
+        <div class="section-header">
+            <span class="section-label">Packaging</span>
+            <div class="section-line"></div>
+            <span class="section-number">03</span>
+        </div>
+
+        <div class="packaging-hero reveal">
+            <div class="pack-main">
+                <svg viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+                    <rect width="640" height="480" fill="#161616" />
+                    <radialGradient id="boxLight" cx="40%" cy="35%" r="55%">
+                        <stop offset="0%" stop-color="#222" />
+                        <stop offset="100%" stop-color="#101010" />
+                    </radialGradient>
+                    <rect width="640" height="480" fill="url(#boxLight)" />
+                    <!-- Premium box 3D perspective -->
+                    <!-- Box lid top -->
+                    <polygon points="120,140 400,100 540,185 260,225" fill="#1e1e1e" />
+                    <!-- Box lid front face -->
+                    <polygon points="120,140 260,225 260,265 120,180" fill="#1a1a1a" />
+                    <!-- Box lid right face -->
+                    <polygon points="400,100 540,185 540,225 400,140" fill="#222" />
+                    <!-- Box body front -->
+                    <polygon points="120,180 260,265 260,380 120,295" fill="#161616" />
+                    <!-- Box body right -->
+                    <polygon points="260,265 540,225 540,340 260,380" fill="#1a1a1a" />
+
+                    <!-- Lid surface logo -->
+                    <text x="290" y="168" font-family="serif" font-size="20" fill="#2a2a2a" text-anchor="middle"
+                        letter-spacing="5" transform="rotate(-12,290,168)">HIDDEN GENESIS</text>
+                    <line x1="195" y1="175" x2="385" y2="148" stroke="#252525" stroke-width="0.8" />
+                    <text x="285" y="183" font-family="sans-serif" font-size="8" fill="#222" text-anchor="middle"
+                        letter-spacing="4" transform="rotate(-12,285,183)">BORN FROM SILENCE</text>
+
+                    <!-- Ribbon -->
+                    <path d="M330,100 Q330,195 330,265" stroke="#282828" stroke-width="3" />
+                    <path d="M250,155 Q330,140 410,125" stroke="#282828" stroke-width="3" />
+                    <!-- Ribbon bow knot -->
+                    <ellipse cx="330" cy="148" rx="22" ry="14" fill="none" stroke="#2a2a2a" stroke-width="2.5"
+                        transform="rotate(-12,330,148)" />
+                    <circle cx="330" cy="148" r="4" fill="#252525" />
+
+                    <!-- Open box content peek (tissue) -->
+                    <ellipse cx="190" cy="264" rx="85" ry="60" fill="#141414" transform="rotate(-12,190,264)" />
+
+                    <!-- Emboss detail lines -->
+                    <rect x="128" y="186" width="124" height="90" fill="none" stroke="#1e1e1e" stroke-width="0.5"
+                        transform="skewY(18) translate(0,-50)" />
+
+                    <text x="140" y="425" font-family="sans-serif" font-size="9" fill="#252525"
+                        letter-spacing="4">EXTERIOR VIEW</text>
+                </svg>
+                <div class="pack-main-label">Premium Packaging Box</div>
+            </div>
+
+            <div class="pack-info">
+                <div>
+                    <p class="pack-info-title">Packaging as<br>a Statement</p>
+                    <p class="pack-info-body">
+                        The unboxing is part of the experience. Every fold deliberate. Every material chosen for its
+                        silence — matte black surfaces that absorb light, embossed marks that ask to be touched.
+                    </p>
+
+                    <ul class="pack-features">
+                        <li>Premium Matte Finish</li>
+                        <li>Emboss Logo on Cover</li>
+                        <li>Magnetic Closure</li>
+                        <li>Thank You Card Included</li>
+                        <li>Black Tissue Paper Inner</li>
+                        <li>Custom Wax Seal</li>
+                    </ul>
+                </div>
+
+                <a href="#" class="btn-primary" style="margin-top:40px;">Packaging Details</a>
+            </div>
+        </div>
+
+        <div class="packaging-row reveal">
+            <!-- Open box -->
+            <div class="pack-thumb">
+                <div class="pack-thumb-visual">
+                    <svg viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+                        <rect width="240" height="200" fill="#181818" />
+                        <!-- Open box -->
+                        <polygon points="30,80 140,55 210,95 100,120" fill="#1e1e1e" />
+                        <polygon points="30,120 100,145 100,120 30,80" fill="#1a1a1a" />
+                        <polygon points="100,120 210,95 210,135 100,160" fill="#161616" />
+                        <!-- Tissue inside -->
+                        <ellipse cx="120" cy="122" rx="58" ry="30" fill="#141414" />
+                        <!-- Garment peek -->
+                        <rect x="88" y="108" width="64" height="32" rx="2" fill="#111" opacity="0.8" />
+                        <text x="120" y="128" font-family="serif" font-size="8" fill="#1e1e1e" text-anchor="middle"
+                            letter-spacing="1">HG</text>
+                    </svg>
+                </div>
+                <div class="pack-thumb-label">Open Box</div>
+            </div>
+
+            <!-- Inside detail -->
+            <div class="pack-thumb">
+                <div class="pack-thumb-visual">
+                    <svg viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+                        <rect width="240" height="200" fill="#141414" />
+                        <!-- Inside box view -->
+                        <rect x="35" y="40" width="170" height="130" rx="3" fill="#181818" />
+                        <!-- Tissue folds -->
+                        <path d="M35 80 Q120 65 205 80" stroke="#1e1e1e" stroke-width="1.5" fill="none" />
+                        <path d="M35 90 Q120 75 205 90" stroke="#1c1c1c" stroke-width="1" fill="none" />
+                        <!-- Logo on bottom -->
+                        <text x="120" y="145" font-family="serif" font-size="16" fill="#1e1e1e" text-anchor="middle"
+                            letter-spacing="4">HIDDEN</text>
+                        <text x="120" y="162" font-family="serif" font-size="16" fill="#1e1e1e" text-anchor="middle"
+                            letter-spacing="4">GENESIS</text>
+                    </svg>
+                </div>
+                <div class="pack-thumb-label">Inside Detail</div>
+            </div>
+
+            <!-- Emboss logo -->
+            <div class="pack-thumb">
+                <div class="pack-thumb-visual">
+                    <svg viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+                        <rect width="240" height="200" fill="#161616" />
+                        <radialGradient id="emLight" cx="40%" cy="40%" r="50%">
+                            <stop offset="0%" stop-color="#202020" />
+                            <stop offset="100%" stop-color="#131313" />
+                        </radialGradient>
+                        <rect width="240" height="200" fill="url(#emLight)" />
+                        <!-- Emboss simulation -->
+                        <text x="120" y="95" font-family="serif" font-size="22" fill="#1a1a1a" text-anchor="middle"
+                            letter-spacing="5">HIDDEN</text>
+                        <text x="120" y="118" font-family="serif" font-size="22" fill="#1a1a1a" text-anchor="middle"
+                            letter-spacing="5">GENESIS</text>
+                        <!-- Highlight offset (emboss effect) -->
+                        <text x="119" y="94" font-family="serif" font-size="22" fill="#222" text-anchor="middle"
+                            letter-spacing="5">HIDDEN</text>
+                        <text x="119" y="117" font-family="serif" font-size="22" fill="#222" text-anchor="middle"
+                            letter-spacing="5">GENESIS</text>
+                        <line x1="80" y1="128" x2="160" y2="128" stroke="#1c1c1c" stroke-width="0.8" />
+                        <text x="120" y="140" font-family="sans-serif" font-size="7" fill="#1a1a1a" text-anchor="middle"
+                            letter-spacing="3">BORN FROM SILENCE</text>
+                    </svg>
+                </div>
+                <div class="pack-thumb-label">Emboss Logo</div>
+            </div>
+
+            <!-- Thank you card -->
+            <div class="pack-thumb">
+                <div class="pack-thumb-visual">
+                    <svg viewBox="0 0 240 200" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+                        <rect width="240" height="200" fill="#181818" />
+                        <!-- Card -->
+                        <rect x="40" y="45" width="160" height="110" rx="3" fill="#1a1a1a" />
+                        <rect x="40" y="45" width="160" height="4" rx="2" fill="#1e1e1e" />
+                        <!-- Card content -->
+                        <text x="120" y="90" font-family="serif" font-size="10" fill="#252525" text-anchor="middle"
+                            letter-spacing="1" font-style="italic">Sometimes,</text>
+                        <text x="120" y="106" font-family="serif" font-size="10" fill="#252525" text-anchor="middle"
+                            letter-spacing="1" font-style="italic">not reacting is the</text>
+                        <text x="120" y="122" font-family="serif" font-size="10" fill="#252525" text-anchor="middle"
+                            letter-spacing="1" font-style="italic">strongest response.</text>
+                        <line x1="80" y1="132" x2="160" y2="132" stroke="#1e1e1e" stroke-width="0.8" />
+                        <text x="120" y="145" font-family="sans-serif" font-size="7" fill="#1e1e1e" text-anchor="middle"
+                            letter-spacing="2">Thank you for supporting</text>
+                        <text x="120" y="155" font-family="sans-serif" font-size="7" fill="#222" text-anchor="middle"
+                            letter-spacing="2">Hidden Genesis.</text>
+                    </svg>
+                </div>
+                <div class="pack-thumb-label">Thank You Card</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- BRAND STORY -->
+    <section id="brand-story">
+        <div class="section-header">
+            <span class="section-label">Brand Story</span>
+            <div class="section-line"></div>
+            <span class="section-number">04</span>
+        </div>
+
+        <div class="story-layout">
+            <div class="story-text reveal">
+                <span class="section-label" style="display:block;margin-bottom:32px;">Our Origin</span>
+                <h2 class="story-heading">A brand born<br>in the space between<br><em>thought and silence.</em></h2>
+                <p class="story-body">
+                    Hidden Genesis speaks without shouting. It exists for those who understand that the most powerful
+                    presence needs no announcement. Inspired by the beauty of restraint and the strength of inner
+                    stillness.
+                </p>
+                <p class="story-body">
+                    We believe that not everything needs a reaction. That silence is a choice — a powerful one. Each
+                    piece is designed to carry that philosophy on the body.
+                </p>
+                <p class="story-body">
+                    Wear your mindset.<br>Live in your calm.
+                </p>
+                <div class="story-sig">
+                    <div class="story-sig-name">Hidden Genesis</div>
+                    <div class="story-sig-sub">Born From Silence</div>
+                </div>
+            </div>
+
+            <div class="story-visual reveal" style="transition-delay:0.3s">
+                <div class="story-image-frame">
+                    <svg viewBox="0 0 400 540" xmlns="http://www.w3.org/2000/svg"
+                        style="width:100%;height:100%;display:block">
+                        <rect width="400" height="540" fill="#141414" />
+                        <radialGradient id="storyLight" cx="60%" cy="25%" r="60%">
+                            <stop offset="0%" stop-color="#222" />
+                            <stop offset="100%" stop-color="#0e0e0e" />
+                        </radialGradient>
+                        <rect width="400" height="540" fill="url(#storyLight)" />
+
+                        <!-- Model back view showing print -->
+                        <!-- Pants/legs -->
+                        <path d="M145 340 Q135 400 128 490 Q138 495 155 492 Q162 420 178 355Z" fill="#131313" />
+                        <path d="M255 340 Q265 400 272 490 Q262 495 245 492 Q238 420 222 355Z" fill="#131313" />
+                        <!-- Shoes -->
+                        <ellipse cx="140" cy="492" rx="25" ry="9" fill="#111" transform="rotate(-3,140,492)" />
+                        <rect x="118" y="485" width="44" height="12" rx="3" fill="#1a1a1a"
+                            transform="rotate(-3,140,492)" />
+                        <ellipse cx="260" cy="492" rx="25" ry="9" fill="#111" transform="rotate(3,260,492)" />
+                        <rect x="238" y="485" width="44" height="12" rx="3" fill="#1a1a1a"
+                            transform="rotate(3,260,492)" />
+
+                        <!-- Oversized tshirt back view -->
+                        <path d="M135 210 Q122 225 120 270 Q117 320 120 340 L280 340 Q283 320 280 270 Q278 225 265 210Z"
+                            fill="#171717" />
+                        <!-- Back print -->
+                        <text x="200" y="268" font-family="serif" font-size="12" fill="#222" text-anchor="middle"
+                            letter-spacing="1.5">NOT EVERYTHING</text>
+                        <text x="200" y="286" font-family="serif" font-size="12" fill="#222" text-anchor="middle"
+                            letter-spacing="1.5">NEEDS A REACTION</text>
+                        <line x1="170" y1="295" x2="230" y2="295" stroke="#1e1e1e" stroke-width="0.8" />
+                        <!-- Neck label area -->
+                        <rect x="185" y="212" width="30" height="15" rx="2" fill="#141414" />
+                        <text x="200" y="223" font-family="serif" font-size="6" fill="#202020" text-anchor="middle"
+                            letter-spacing="1">HG</text>
+                        <!-- Sleeves -->
+                        <path d="M120 210 Q102 218 96 248 Q92 264 100 276 Q110 287 122 281 Q133 258 142 232Z"
+                            fill="#171717" />
+                        <path d="M280 210 Q298 218 304 248 Q308 264 300 276 Q290 287 278 281 Q267 258 258 232Z"
+                            fill="#171717" />
+                        <!-- Neck/head area -->
+                        <ellipse cx="200" cy="185" rx="38" ry="42" fill="#1e130d" />
+                        <!-- Hair -->
+                        <path d="M162 178 Q165 150 200 145 Q235 150 238 178 Q228 162 200 160 Q172 162 162 178Z"
+                            fill="#111" />
+                        <!-- Neck -->
+                        <rect x="185" y="195" width="30" height="22" rx="5" fill="#1c1108" opacity="0.9" />
+
+                        <!-- Arm with watch -->
+                        <rect x="289" y="272" width="20" height="14" rx="3" fill="#1c1c1c" />
+                        <rect x="290" y="273" width="18" height="12" rx="2" fill="#111" />
+
+                        <!-- Watermark -->
+                        <text x="30" y="520" font-family="serif" font-size="10" fill="#1c1c1c" letter-spacing="6">HIDDEN
+                            GENESIS</text>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MOODBOARD -->
+    <section id="moodboard">
+        <div class="section-header">
+            <span class="section-label">Moodboard</span>
+            <div class="section-line"></div>
+            <span class="section-number">05</span>
+        </div>
+
+        <div class="moodboard-grid reveal">
+            <!-- Large cell - main image -->
+            <div class="mood-cell large">
+                <svg viewBox="0 0 400 370" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+                    <rect width="400" height="370" fill="#151515" />
+                    <radialGradient id="moodLight1" cx="50%" cy="40%" r="55%">
+                        <stop offset="0%" stop-color="#1e1e1e" />
+                        <stop offset="100%" stop-color="#0d0d0d" />
+                    </radialGradient>
+                    <rect width="400" height="370" fill="url(#moodLight1)" />
+                    <!-- Silhouette standing against landscape -->
+                    <!-- Mountains/water suggestion -->
+                    <path d="M0 260 Q100 220 200 240 Q300 255 400 230 L400 370 L0 370Z" fill="#111" />
+                    <path d="M0 280 Q80 260 180 270 Q280 278 400 255 L400 370 L0 370Z" fill="#0e0e0e" />
+                    <!-- Standing figure -->
+                    <rect x="182" y="155" width="36" height="90" rx="5" fill="#1a1a1a" />
+                    <!-- Head -->
+                    <ellipse cx="200" cy="140" rx="22" ry="25" fill="#181818" />
+                    <!-- Wide pants/legs -->
+                    <path d="M182 240 Q174 290 168 340" stroke="#181818" stroke-width="22" stroke-linecap="round" />
+                    <path d="M218 240 Q226 290 232 340" stroke="#181818" stroke-width="22" stroke-linecap="round" />
+                    <!-- Reflection in water -->
+                    <path d="M182 260 Q174 290 170 320" stroke="#141414" stroke-width="14" stroke-linecap="round"
+                        opacity="0.5" />
+                    <path d="M218 260 Q226 290 228 320" stroke="#141414" stroke-width="14" stroke-linecap="round"
+                        opacity="0.5" />
+                    <ellipse cx="200" cy="265" rx="20" ry="5" fill="#141414" opacity="0.4" />
+                </svg>
+            </div>
+
+            <!-- Fabric texture -->
+            <div class="mood-cell">
+                <svg viewBox="0 0 200 185" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+                    <rect width="200" height="185" fill="#1a1a1a" />
+                    <!-- Fabric weave pattern -->
+                    <defs>
+                        <pattern id="weave" x="0" y="0" width="8" height="8" patternUnits="userSpaceOnUse">
+                            <rect x="0" y="0" width="4" height="4" fill="#1c1c1c" />
+                            <rect x="4" y="4" width="4" height="4" fill="#1c1c1c" />
+                            <rect x="0" y="4" width="4" height="4" fill="#181818" />
+                            <rect x="4" y="0" width="4" height="4" fill="#181818" />
+                        </pattern>
+                    </defs>
+                    <rect width="200" height="185" fill="url(#weave)" />
+                    <rect x="30" y="50" width="140" height="85" rx="3" fill="none" stroke="#222" stroke-width="0.5" />
+                    <text x="100" y="98" font-family="serif" font-size="11" fill="#252525" text-anchor="middle"
+                        letter-spacing="2">24S Cotton</text>
+                    <text x="100" y="114" font-family="sans-serif" font-size="7" fill="#1e1e1e" text-anchor="middle"
+                        letter-spacing="2">Premium Fabric</text>
+                </svg>
+            </div>
+
+            <!-- Plant/nature -->
+            <div class="mood-cell tall">
+                <svg viewBox="0 0 200 370" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+                    <rect width="200" height="370" fill="#121212" />
+                    <!-- Tropical leaf close-up -->
+                    <line x1="100" y1="370" x2="100" y2="80" stroke="#1a1a1a" stroke-width="3" />
+                    <path d="M100 150 Q140 120 180 90 Q170 130 140 160 Q115 175 100 180Z" fill="#161616" />
+                    <path d="M100 200 Q60 170 20 140 Q30 180 60 210 Q85 225 100 230Z" fill="#141414" />
+                    <path d="M100 260 Q145 230 185 195 Q172 238 142 268 Q118 282 100 288Z" fill="#161616" />
+                    <path d="M100 310 Q55 280 15 245 Q28 288 58 318 Q82 332 100 338Z" fill="#141414" />
+                    <!-- Leaf veins -->
+                    <path d="M100 150 Q130 118 178 92" stroke="#191919" stroke-width="1" fill="none" />
+                    <path d="M100 200 Q65 172 22 142" stroke="#181818" stroke-width="1" fill="none" />
+                </svg>
+            </div>
+
+            <!-- Quote cell -->
+            <div class="mood-cell mood-text-cell">
+                <p class="mood-quote">"Not every space needs to be filled."</p>
+                <div class="mood-quote-attr">— Hidden Genesis</div>
+            </div>
+
+            <!-- Cap product detail -->
+            <div class="mood-cell">
+                <svg viewBox="0 0 200 185" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:100%">
+                    <rect width="200" height="185" fill="#181818" />
+                    <radialGradient id="capLight" cx="45%" cy="40%" r="50%">
+                        <stop offset="0%" stop-color="#222" />
+                        <stop offset="100%" stop-color="#141414" />
+                    </radialGradient>
+                    <rect width="200" height="185" fill="url(#capLight)" />
+                    <!-- Cap -->
+                    <path d="M40 115 Q40 72 100 68 Q160 72 160 115 Z" fill="#1a1a1a" />
+                    <path d="M30 120 Q100 132 170 120 Q165 128 100 133 Q35 128 30 120Z" fill="#161616" />
+                    <!-- Panel seam -->
+                    <line x1="100" y1="70" x2="100" y2="115" stroke="#222" stroke-width="1" />
+                    <!-- Embroidered text on cap -->
+                    <text x="100" y="100" font-family="serif" font-size="11" fill="#252525" text-anchor="middle"
+                        letter-spacing="2">HG</text>
+                    <!-- Back strap -->
+                    <rect x="83" y="113" width="34" height="7" rx="2" fill="#161616" />
+                    <text x="100" y="152" font-family="sans-serif" font-size="7" fill="#252525" text-anchor="middle"
+                        letter-spacing="2">Signature Cap</text>
+                </svg>
+            </div>
+
+            <!-- Logo brand identity -->
+            <div class="mood-cell"
+                style="background:#111;padding:32px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;">
+                <div style="border:1px solid #1e1e1e;padding:24px 32px;text-align:center">
+                    <div
+                        style="font-family:'Cormorant Garamond',serif;font-size:22px;letter-spacing:6px;color:#282828;text-transform:uppercase;margin-bottom:8px;">
+                        Hidden Genesis</div>
+                    <div
+                        style="font-family:'Jost',sans-serif;font-size:8px;letter-spacing:5px;color:#1e1e1e;text-transform:uppercase;">
+                        Born From Silence</div>
+                </div>
+            </div>
+
+            <!-- Color palette -->
+            <div class="mood-cell palette-cell">
+                <div class="palette-swatch" style="background:#0a0a0a"></div>
+                <div class="palette-swatch" style="background:#1a1a1a"></div>
+                <div class="palette-swatch" style="background:#3a3a3a"></div>
+                <div class="palette-swatch" style="background:#c8b89a"></div>
+            </div>
+
+            <!-- Wide quote -->
+            <div class="mood-cell wide mood-text-cell" style="background:#0e0e0e;">
+                <p class="mood-quote" style="font-size:26px;">"Silence is also a choice."</p>
+                <div class="mood-quote-attr">Not everything needs a reaction</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-top">
+            <div>
+                <div class="footer-brand">H<span>idden</span> Genesis</div>
+                <p class="footer-tagline">Born from silence. Worn by those who understand that presence needs no
+                    announcement.</p>
+            </div>
+            <div>
+                <div class="footer-col-title">Navigate</div>
+                <ul class="footer-links">
+                    <li><a href="#catalogue">Catalogue</a></li>
+                    <li><a href="#accessories">Accessories</a></li>
+                    <li><a href="#packaging">Packaging</a></li>
+                    <li><a href="#brand-story">Brand Story</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Information</div>
+                <ul class="footer-links">
+                    <li><a href="#">Size Guide</a></li>
+                    <li><a href="#">Shipping Policy</a></li>
+                    <li><a href="#">Returns</a></li>
+                    <li><a href="#">FAQ</a></li>
+                </ul>
+            </div>
+            <div>
+                <div class="footer-col-title">Contact</div>
+                <ul class="footer-links">
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">TikTok</a></li>
+                    <li><a href="#">WhatsApp</a></li>
+                    <li><a href="#">Email</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-copy">© 2026 Hidden Genesis. All rights reserved.</div>
+            <div class="footer-socials">
+                <a href="#">Instagram</a>
+                <a href="#">TikTok</a>
+                <a href="#">Shopee</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const cursor = document.getElementById('cursor');
+        const ring = document.getElementById('cursorRing');
+        let mx = 0, my = 0, rx = 0, ry = 0;
+
+        document.addEventListener('mousemove', e => {
+            mx = e.clientX; my = e.clientY;
+            cursor.style.left = mx - 4 + 'px';
+            cursor.style.top = my - 4 + 'px';
+        });
+
+        function animRing() {
+            rx += (mx - rx) * 0.12;
+            ry += (my - ry) * 0.12;
+            ring.style.left = rx - 18 + 'px';
+            ring.style.top = ry - 18 + 'px';
+            requestAnimationFrame(animRing);
+        }
+        animRing();
+
+        // Scroll reveal
+        const revealEls = document.querySelectorAll('.reveal');
+        const io = new IntersectionObserver(entries => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    io.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.12 });
+
+        revealEls.forEach(el => io.observe(el));
+
+        // Nav transparency on scroll
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 80) {
+                nav.style.background = 'rgba(10,10,10,0.97)';
+                nav.style.backdropFilter = 'blur(10px)';
+            } else {
+                nav.style.background = 'linear-gradient(to bottom, rgba(10,10,10,0.95) 0%, transparent 100%)';
+                nav.style.backdropFilter = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>
