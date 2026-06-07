@@ -5,24 +5,17 @@ const footerNav = [
   { href: '#brand-story', label: 'Brand Story' },
 ]
 
-const footerInfo = [
-  { href: '#', label: 'Size Guide' },
-  { href: '#', label: 'Shipping Policy' },
-  { href: '#', label: 'Returns' },
-  { href: '#', label: 'FAQ' },
-]
-
 const footerContact = [
-  { href: '#', label: 'Instagram' },
-  { href: '#', label: 'TikTok' },
-  { href: '#', label: 'WhatsApp' },
-  { href: '#', label: 'Email' },
+  { href: 'https://www.instagram.com/hidden.genesis_', label: 'Instagram' },
+  { href: 'https://www.tiktok.com/@hidden.genesis4', label: 'TikTok' },
+  { href: 'https://wa.me/62882001428923', label: 'WhatsApp' },
+  { href: 'https://id.shp.ee/UcKqEJBH', label: 'Shopee' },
 ]
 
 export default function Footer() {
   return (
     <footer className="bg-black border-t border-dark-gray px-6 md:px-[60px] pt-20 md:pt-[80px] pb-10 md:pb-10">
-      <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr_1fr] gap-10 md:gap-[60px] mb-20 md:mb-[80px]">
+      <div className="grid grid-cols-1 md:grid-cols-[2fr_1fr_1fr] gap-10 md:gap-[60px] mb-20 md:mb-[80px]">
         {/* Brand */}
         <div>
           <div className="font-serif text-[28px] font-light tracking-[0.3em] text-white uppercase mb-5">
@@ -47,27 +40,13 @@ export default function Footer() {
           </ul>
         </div>
 
-        {/* Information */}
-        <div>
-          <div className="text-[10px] tracking-[0.4em] uppercase text-accent mb-6">Information</div>
-          <ul className="list-none flex flex-col gap-3">
-            {footerInfo.map((l) => (
-              <li key={l.label}>
-                <a href={l.href} className="text-[13px] text-mid-gray no-underline transition-colors hover:text-white tracking-[0.05em]">
-                  {l.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-
         {/* Contact */}
         <div>
           <div className="text-[10px] tracking-[0.4em] uppercase text-accent mb-6">Contact</div>
           <ul className="list-none flex flex-col gap-3">
             {footerContact.map((l) => (
               <li key={l.label}>
-                <a href={l.href} className="text-[13px] text-mid-gray no-underline transition-colors hover:text-white tracking-[0.05em]">
+                <a href={l.href} target="_blank" rel="noopener noreferrer" className="text-[13px] text-mid-gray no-underline transition-colors hover:text-white tracking-[0.05em]">
                   {l.label}
                 </a>
               </li>

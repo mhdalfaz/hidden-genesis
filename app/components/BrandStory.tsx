@@ -18,24 +18,28 @@ export default function BrandStory() {
               Our Origin
             </span>
             <h2 className="font-serif text-[clamp(36px,4vw,56px)] font-light leading-tight text-white mb-10">
-              A brand born<br />in the space between<br />
-              <em className="italic text-accent not-italic">thought and silence.</em>
+              Born from shadow.<br />Forged in silence.<br />
             </h2>
             <p className="text-[14px] text-light-gray leading-relaxed mb-6">
-              Hidden Genesis speaks without shouting. It exists for those who understand that the most powerful
-              presence needs no announcement. Inspired by the beauty of restraint and the strength of inner
-              stillness.
+              “Some things were never meant to be found.
+              They were meant to awaken.”
             </p>
             <p className="text-[14px] text-light-gray leading-relaxed mb-6">
-              We believe that not everything needs a reaction. That silence is a choice — a powerful one. Each
-              piece is designed to carry that philosophy on the body.
+              Hidden Genesis lahir dari bayangan,
+              dibentuk dalam sunyi,
+              untuk mereka yang tumbuh tanpa perlu validasi dunia.
+            </p>
+            <p className="text-[14px] text-light-gray leading-relaxed mb-6">
+              Bukan sekadar brand.
+              Ini adalah simbol metamorfosis —
+              tentang versi dirimu yang perlahan bangkit
+              dari gelap menjadi sesuatu yang tak bisa diabaikan.
             </p>
             <p className="text-[14px] text-light-gray leading-relaxed mb-6">
               Wear your mindset.<br />Live in your calm.
             </p>
             <div className="mt-12 pt-8 border-t border-dark-gray">
               <div className="font-serif text-[22px] italic text-white">Hidden Genesis</div>
-              <div className="text-[10px] tracking-[0.3em] uppercase text-mid-gray mt-1">Born From Silence</div>
             </div>
           </div>
         </ScrollReveal>

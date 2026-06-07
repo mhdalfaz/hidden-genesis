@@ -1,5 +1,9 @@
+'use client'
+
+import { useState, ReactNode } from 'react'
 import Image from 'next/image'
 import ScrollReveal from './ScrollReveal'
+import Modal from './Modal'
 
 const packThumbs = [
   {
@@ -47,7 +51,31 @@ const packThumbs = [
   },
 ]
 
+type SlideItem = { label: string; svg?: ReactNode; image?: string }
+
+const allSlides: SlideItem[] = [
+  { label: 'Premium Packaging Box', image: '/images/package.jpg' },
+  ...packThumbs,
+]
+
 export default function Packaging() {
+  const [modalOpen, setModalOpen] = useState(false)
+
+  const slideKeys = allSlides.map((s) => s.label)
+
+  const renderSlide = (label: string) => {
+    const item = allSlides.find((s) => s.label === label)
+    if (!item) return null
+    if (item.image) {
+      return <Image src={item.image} alt={item.label} fill sizes="100vw" className="object-contain" />
+    }
+    return (
+      <div className="flex items-center justify-center w-full h-full p-12 md:p-16">
+        {item.svg}
+      </div>
+    )
+  }
+
   return (
     <section id="packaging" className="px-6 md:px-[60px] py-[120px] bg-near-black">
       <div className="flex items-center gap-5 mb-16">
@@ -98,10 +126,13 @@ export default function Packaging() {
                 ))}
               </ul>
             </div>
-            <a href="#" className="inline-flex items-center gap-4 border border-white/30 px-8 py-[14px] text-[11px] tracking-[0.3em] uppercase text-white no-underline transition-all duration-[0.4s] w-fit hover:bg-white hover:text-black hover:border-white mt-10 group">
+            <button
+              onClick={() => setModalOpen(true)}
+              className="inline-flex items-center gap-4 border border-white/30 px-8 py-[14px] text-[11px] tracking-[0.3em] uppercase text-white no-underline transition-all duration-[0.4s] w-fit hover:bg-white hover:text-black hover:border-white mt-10 group cursor-pointer"
+            >
               Packaging Details
               <span className="transition-transform duration-300 group-hover:translate-x-[6px]">→</span>
-            </a>
+            </button>
           </div>
         </div>
       </ScrollReveal>
@@ -125,6 +156,15 @@ export default function Packaging() {
           ))}
         </div>
       </ScrollReveal>
+
+      <Modal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        images={slideKeys}
+        title="Packaging"
+        subtitle="Packaging as a Statement"
+        renderSlide={renderSlide}
+      />
     </section>
   )
 }

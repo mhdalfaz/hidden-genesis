@@ -1,27 +1,58 @@
+'use client'
+
+import { useState } from 'react'
 import Image from 'next/image'
 import ScrollReveal from './ScrollReveal'
+import Modal from './Modal'
 
 const products = [
   {
     name: 'Collection 1',
     price: 'Rp 155.000',
-    featured: true,
     image: '/images/design-collection-1.png',
+    images: [
+      '/images/design-collection-1.png',
+      '/images/model-1-collection-1.png',
+      '/images/model-1-collection-2.png',
+      '/images/model-1-collection-3.png',
+      '/images/hang-tag.jpg',
+      '/images/neck-label.jpg',
+    ],
   },
   {
     name: 'Collection 2',
     price: 'Rp 155.000',
     image: '/images/design-collection-2.png',
+    images: [
+      '/images/design-collection-2.png',
+      '/images/model-1-collection-4.png',
+      '/images/model-2-collection-2.png',
+      '/images/model-3-collection-2.png',
+      '/images/package.jpg',
+    ],
   },
   {
     name: 'Collection 3',
     price: 'Rp 155.000',
     image: '/images/design-collection-3.png',
+    images: [
+      '/images/design-collection-3.png',
+      '/images/model-1-collection-5.png',
+      '/images/brand-label.jpg',
+      '/images/stickers.jpg',
+    ],
   },
   {
     name: 'Collection 4',
     price: 'Rp 155.000',
     image: '/images/model-1-collection-5.png',
+    images: [
+      '/images/model-1-collection-5.png',
+      '/images/model-1-collection-1.png',
+      '/images/model-1-collection-4.png',
+      '/images/design-collection-1.png',
+      '/images/design-collection-3.png',
+    ],
   },
 ]
 
@@ -78,16 +109,22 @@ const features = [
 ]
 
 export default function Catalogue() {
+  const [selected, setSelected] = useState<(typeof products)[0] | null>(null)
+  const [modalOpen, setModalOpen] = useState(false)
+
+  const openModal = (p: (typeof products)[0]) => {
+    setSelected(p)
+    setModalOpen(true)
+  }
+
   return (
     <section id="catalogue" className="px-6 md:px-[60px] py-[120px] bg-near-black">
-      {/* Header */}
       <div className="flex items-center gap-5 mb-16">
         <span className="text-[10px] tracking-[0.4em] uppercase text-accent">Product Catalogue</span>
         <div className="flex-1 h-[1px] bg-dark-gray" />
         <span className="font-serif text-[11px] text-dark-gray">01</span>
       </div>
 
-      {/* Intro */}
       <ScrollReveal>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-20 items-end mb-20">
           <h2 className="font-display text-white leading-none tracking-[0.05em] text-[clamp(48px,6vw,80px)]">
@@ -103,22 +140,19 @@ export default function Catalogue() {
         </div>
       </ScrollReveal>
 
-      {/* Product grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-[2px]">
         {products.map((p) => (
           <div key={p.name} className="bg-charcoal overflow-hidden group">
             <div className="relative overflow-hidden aspect-[4/3]">
-              <Image
-                src={p.image}
-                alt={p.name}
-                fill
-                className="object-cover"
-              />
-              <div className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-[0.4s]">
+              <Image src={p.image} alt={p.name} fill className="object-cover" />
+              <button
+                onClick={() => openModal(p)}
+                className="absolute inset-0 bg-black/70 flex flex-col items-center justify-center gap-3 opacity-0 group-hover:opacity-100 transition-opacity duration-[0.4s] cursor-pointer"
+              >
                 <span className="text-[10px] tracking-[0.3em] uppercase text-white border border-white/40 px-6 py-[10px]">
                   Quick View
                 </span>
-              </div>
+              </button>
             </div>
             <div className="flex justify-between items-center px-6 py-5 border-t border-dark-gray">
               <span className="text-[12px] tracking-[0.2em] uppercase text-silver">{p.name}</span>
@@ -128,7 +162,6 @@ export default function Catalogue() {
         ))}
       </div>
 
-      {/* Detail cards */}
       <div className="grid grid-cols-2 md:grid-cols-4 gap-[2px] mt-[2px]">
         {details.map((d, i) => (
           <ScrollReveal key={d.label} delay={i * 100}>
@@ -140,7 +173,6 @@ export default function Catalogue() {
         ))}
       </div>
 
-      {/* Features strip */}
       <ScrollReveal>
         <div className="grid grid-cols-2 md:grid-cols-4 border-t border-b border-dark-gray my-20">
           {features.map((f) => (
@@ -152,6 +184,16 @@ export default function Catalogue() {
           ))}
         </div>
       </ScrollReveal>
+
+      {selected && (
+        <Modal
+          open={modalOpen}
+          onClose={() => setModalOpen(false)}
+          images={selected.images}
+          title={selected.name}
+          subtitle={selected.price}
+        />
+      )}
     </section>
   )
 }

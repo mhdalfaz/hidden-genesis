@@ -1,5 +1,9 @@
+'use client'
+
+import { useState, ReactNode } from 'react'
 import Image from 'next/image'
 import ScrollReveal from './ScrollReveal'
+import Modal from './Modal'
 
 const accItems = [
   {
@@ -88,7 +92,31 @@ const extraItems = [
   },
 ]
 
+type SlideItem = { label: string; svg?: ReactNode; image?: string }
+
+const allSlides: SlideItem[] = [
+  ...accItems,
+  ...extraItems,
+]
+
 export default function Accessories() {
+  const [modalOpen, setModalOpen] = useState(false)
+
+  const slideKeys = allSlides.map((s) => s.label)
+
+  const renderSlide = (label: string) => {
+    const item = allSlides.find((s) => s.label === label)
+    if (!item) return null
+    if (item.image) {
+      return <Image src={item.image} alt={item.label} fill sizes="100vw" className="object-contain" />
+    }
+    return (
+      <div className="flex items-center justify-center w-full h-full p-12 md:p-20">
+        {item.svg}
+      </div>
+    )
+  }
+
   return (
     <section id="accessories" className="px-6 md:px-[60px] py-[120px] bg-black">
       <div className="flex items-center gap-5 mb-16">
@@ -108,10 +136,13 @@ export default function Accessories() {
               Each accessory carries the same silence.<br />
               The same intention. The same restraint.
             </p>
-            <a href="#" className="inline-flex items-center gap-4 border border-white/30 px-8 py-[14px] text-[11px] tracking-[0.3em] uppercase text-white no-underline transition-all duration-[0.4s] w-fit hover:bg-white hover:text-black hover:border-white group">
+            <button
+              onClick={() => setModalOpen(true)}
+              className="inline-flex items-center gap-4 border border-white/30 px-8 py-[14px] text-[11px] tracking-[0.3em] uppercase text-white no-underline transition-all duration-[0.4s] w-fit hover:bg-white hover:text-black hover:border-white group cursor-pointer"
+            >
               View All Accessories
               <span className="transition-transform duration-300 group-hover:translate-x-[6px]">→</span>
-            </a>
+            </button>
           </div>
         </ScrollReveal>
 
@@ -154,6 +185,15 @@ export default function Accessories() {
           ))}
         </div>
       </ScrollReveal>
+
+      <Modal
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        images={slideKeys}
+        title="Accessories"
+        subtitle="Complete the look"
+        renderSlide={renderSlide}
+      />
     </section>
   )
 }

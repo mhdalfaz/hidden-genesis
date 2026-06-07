@@ -30,7 +30,7 @@ export default function Hero() {
         </h1>
 
         <p className="font-serif text-base italic text-light-gray leading-relaxed max-w-[320px] mb-6 md:mb-12">
-          Born from the quiet spaces between thoughts. Worn by those who speak through presence, not noise.
+          Born from shadow. Forged in silence.
         </p>
 
         <a
