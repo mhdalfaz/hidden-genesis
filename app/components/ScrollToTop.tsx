@@ -6,7 +6,10 @@ export default function ScrollToTop() {
   const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setVisible(window.scrollY > 900)
+    const onScroll = () => {
+      const atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 50
+      setVisible(atBottom)
+    }
     window.addEventListener('scroll', onScroll)
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
@@ -16,7 +19,7 @@ export default function ScrollToTop() {
   return (
     <button
       onClick={scrollToTop}
-      className={`fixed bottom-20 right-6 z-40 flex items-center justify-center w-11 h-11 bg-white/10 border border-white/20 text-white no-underline transition-all duration-500 hover:bg-white hover:text-black rounded-sm ${
+      className={`fixed bottom-6 right-6 z-40 flex items-center justify-center w-11 h-11 bg-white/10 border border-white/20 text-white no-underline transition-all duration-500 hover:bg-white hover:text-black rounded-sm ${
         visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
       }`}
       aria-label="Scroll to top"

@@ -49,7 +49,7 @@ export default function Hero() {
       </div>
 
       {/* Right - Hero image */}
-      <div className="relative min-h-[60vh] md:h-full">
+      <div className="relative min-h-[70vh] md:h-full">
         <Image
           src="/images/hero.png"
           alt="Hidden Genesis model"

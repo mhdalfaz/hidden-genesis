@@ -6,7 +6,7 @@ import FloatingOrder from './components/FloatingOrder'
 import ScrollToTop from './components/ScrollToTop'
 
 export const metadata: Metadata = {
-  title: 'Hidden Genesis — Born From Silence',
+  title: 'Hidden Genesis — Born from shadow, forged in silence.',
   description: 'Fashion Streetwear — Born from the quiet spaces between thoughts.',
 }
 

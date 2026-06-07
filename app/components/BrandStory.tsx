@@ -49,7 +49,7 @@ export default function BrandStory() {
           <div className="relative">
             <div className="bg-charcoal aspect-[3/4] relative overflow-hidden">
               <Image
-                src="/images/logo.png"
+                src="/images/logo-hidden-genesis.png"
                 alt="Hidden Genesis brand label"
                 fill
                 className="object-cover"

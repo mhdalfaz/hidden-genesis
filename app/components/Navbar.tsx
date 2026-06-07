@@ -31,7 +31,7 @@ export default function Navbar() {
     >
       <a href="#" className="flex items-center gap-3 no-underline">
         <Image
-          src="/images/logo.png"
+          src="/images/logo-hidden-genesis.png"
           alt="Hidden Genesis"
           width={36}
           height={36}
