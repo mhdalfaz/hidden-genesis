@@ -1,14 +1,23 @@
+'use client'
+
 import Image from 'next/image'
+import { useDesktopMode } from '../hooks/useDesktopMode'
 
 export default function Hero() {
+  const { isDesktopMode, vh } = useDesktopMode()
   return (
     <section
       id="hero"
       className="relative h-screen grid grid-cols-1 md:grid-cols-2 overflow-hidden"
-      style={{ padding: 0 }}
+      style={{
+        padding: 0,
+        maxHeight: isDesktopMode && vh > 760 ? '600px' : undefined,
+      }}
     >
       {/* Left */}
-      <div className="flex flex-col justify-end px-6 md:px-[60px] pt-30 md:pb-[160px] relative z-10">
+      <div className={`flex flex-col px-6 md:px-[60px] pt-20 relative z-10 ${
+        isDesktopMode && vh > 760 ? 'md:pt-30' : 'md:pt-50'
+      }`}>
         <div className="flex items-center gap-4 mb-6">
           <span className="w-10 h-[1px] bg-accent" />
           <span className="text-[10px] tracking-[0.4em] uppercase text-accent">
@@ -45,7 +54,9 @@ export default function Hero() {
           src="/images/hero.png"
           alt="Hidden Genesis model"
           fill
-          className="object-contain md:object-bottom"
+          className={`object-contain ${
+            isDesktopMode && vh > 760 ? 'md:object-top pt-50' : 'md:object-bottom'
+          }`}
           preload
         />
       </div>
