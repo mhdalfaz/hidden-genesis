@@ -7,59 +7,54 @@ import Modal from './Modal'
 
 const products = [
   {
-    name: 'Collection 1',
-    price: 'Rp 155.000',
-    image: '/images/design-collection-1.png',
+    name: 'Metamorphosis',
+    price: 'Rp 159.000',
+    image: '/images/design-metamorphosis.jpg',
     images: [
-      '/images/design-collection-1.png',
-      '/images/model-1-collection-1.png',
-      '/images/model-1-collection-2.png',
-      '/images/model-1-collection-3.png',
-      '/images/hang-tag.jpg',
-      '/images/neck-label.jpg',
+      '/images/design-metamorphosis.jpg',
+      '/images/model-metamorphosis-1.jpg',
+      '/images/model-metamorphosis-2.jpg',
     ],
   },
   {
-    name: 'Collection 2',
-    price: 'Rp 155.000',
-    image: '/images/design-collection-2.png',
+    name: 'Hidden Genesis',
+    price: 'Rp 159.000',
+    image: '/images/design-hidden-genesis-v1.jpg',
     images: [
-      '/images/design-collection-2.png',
-      '/images/model-1-collection-4.png',
-      '/images/model-2-collection-2.png',
-      '/images/model-3-collection-2.png',
-      '/images/package.jpg',
+      '/images/design-hidden-genesis-v1.jpg',
+      '/images/design-hidden-genesis-v1-back.jpg',
+      '/images/model-hidden-genesis-v1-1.jpg',
+      // '/images/model-hidden-genesis-v1-2.jpg',
+      '/images/model-hidden-genesis-v1-3.jpg',
+      '/images/model-hidden-genesis-v1-4.jpg',
     ],
   },
   {
-    name: 'Collection 3',
-    price: 'Rp 155.000',
-    image: '/images/design-collection-3.png',
+    name: 'Hidden Genesis Begin',
+    price: 'Rp 159.000',
+    image: '/images/design-hidden-genesis-v2.jpg',
     images: [
-      '/images/design-collection-3.png',
-      '/images/model-1-collection-5.png',
-      '/images/brand-label.jpg',
-      '/images/stickers.jpg',
+      '/images/design-hidden-genesis-v2.jpg',
+      '/images/model-hidden-genesis-v2-1.jpg',
+      '/images/model-hidden-genesis-v2-2.jpg',
     ],
   },
   {
-    name: 'Collection 4',
-    price: 'Rp 155.000',
-    image: '/images/model-1-collection-5.png',
+    name: 'Oblivion',
+    price: 'Rp 159.000',
+    image: '/images/design-oblivion.jpg',
     images: [
-      '/images/model-1-collection-5.png',
-      '/images/model-1-collection-1.png',
-      '/images/model-1-collection-4.png',
-      '/images/design-collection-1.png',
-      '/images/design-collection-3.png',
+      '/images/design-oblivion.jpg',
+      '/images/model-oblivion-1.jpg',
+      '/images/model-oblivion-2.jpg',
     ],
   },
 ]
 
 const details = [
   { label: 'Material', title: 'Premium\nCotton 24S' },
-  { label: 'Silhouette', title: 'Oversize\nFit' },
-  { label: 'Print Method', title: 'High Quality\nDTG Print' },
+  { label: 'Silhouette', title: 'Regular\nFit' },
+  { label: 'Print Method', title: 'Discharge' },
   { label: 'Availability', title: 'Limited\nEdition' },
 ]
 
@@ -76,8 +71,8 @@ const features = [
     ),
   },
   {
-    name: 'Oversize Fit',
-    desc: 'Silhouette crafted for unrestricted movement',
+    name: 'Regular Fit',
+    desc: 'Silhouette crafted for balanced movement',
     svg: (
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
         <rect x="6" y="6" width="20" height="22" rx="2" stroke="#555" strokeWidth="1" />
@@ -88,8 +83,8 @@ const features = [
     ),
   },
   {
-    name: 'High Quality Print',
-    desc: 'Fade-resistant screen printing technique',
+    name: 'Discharge',
+    desc: 'Soft-to-touch screen printing technique',
     svg: (
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
         <rect x="7" y="7" width="18" height="18" rx="2" stroke="#555" strokeWidth="1" />
@@ -164,8 +159,8 @@ export default function Catalogue() {
 
       <div className="grid grid-cols-2 md:grid-cols-4 gap-[2px] mt-[2px]">
         {details.map((d, i) => (
-          <ScrollReveal key={d.label} delay={i * 100}>
-            <div className="bg-charcoal px-6 py-8 overflow-hidden">
+          <ScrollReveal key={d.label} delay={i * 100} className="h-full">
+            <div className="bg-charcoal px-6 py-8 overflow-hidden h-full flex flex-col justify-start">
               <div className="text-[9px] tracking-[0.4em] uppercase text-mid-gray mb-4">{d.label}</div>
               <div className="font-serif text-[22px] text-white font-light whitespace-pre-line">{d.title}</div>
             </div>

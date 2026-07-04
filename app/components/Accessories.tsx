@@ -1,64 +1,20 @@
 'use client'
 
-import { useState, ReactNode } from 'react'
+import React, { useState, ReactNode } from 'react'
 import Image from 'next/image'
 import ScrollReveal from './ScrollReveal'
 import Modal from './Modal'
 
-const accItems = [
+type SlideItem = { label: string; svg?: ReactNode; image?: string }
+
+const accItems: SlideItem[] = [
   {
-    label: 'Signature Cap',
-    svg: (
-      <svg viewBox="0 0 180 160" style={{ width: 140, height: 120 }}>
-        <ellipse cx="90" cy="110" rx="78" ry="20" fill="#111" />
-        <path d="M30 100 Q30 50 90 45 Q150 50 150 100 Z" fill="#1a1a1a" />
-        <path d="M20 105 Q90 115 160 105 Q155 112 90 118 Q25 112 20 105Z" fill="#151515" />
-        <line x1="90" y1="48" x2="90" y2="100" stroke="#222" strokeWidth="1" />
-        <text x="90" y="82" fontFamily="serif" fontSize="12" fill="#252525" textAnchor="middle" letterSpacing="2">HG</text>
-        <rect x="78" y="98" width="24" height="6" rx="2" fill="#161616" />
-      </svg>
-    ),
+    label: 'Sticker Pack',
+    image: '/images/sticker-1.jpg',
   },
   {
-    label: 'Canvas Tote',
-    svg: (
-      <svg viewBox="0 0 160 180" style={{ width: 120, height: 140 }}>
-        <path d="M55 60 Q55 30 80 25 Q105 30 105 60" stroke="#2a2a2a" strokeWidth="5" fill="none" strokeLinecap="round" />
-        <rect x="30" y="58" width="100" height="110" rx="4" fill="#181818" />
-        <rect x="30" y="58" width="100" height="18" rx="4" fill="#1c1c1c" />
-        <text x="80" y="122" fontFamily="serif" fontSize="13" fill="#252525" textAnchor="middle" letterSpacing="2">HG</text>
-        <text x="80" y="138" fontFamily="sans-serif" fontSize="6" fill="#202020" textAnchor="middle" letterSpacing="2">HIDDEN GENESIS</text>
-        <ellipse cx="80" cy="172" rx="50" ry="8" fill="#111" opacity="0.6" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Logo Socks',
-    svg: (
-      <svg viewBox="0 0 160 160" style={{ width: 130, height: 130 }}>
-        <path d="M50 30 Q44 30 42 40 L38 110 Q36 130 55 138 Q72 144 82 130 Q90 118 78 108 L74 85 L86 80 L80 38 Q78 30 70 30Z" fill="#1a1a1a" />
-        <rect x="44" y="30" width="34" height="4" rx="1" fill="#222" />
-        <rect x="44" y="36" width="34" height="2" rx="1" fill="#1e1e1e" />
-        <text x="61" y="44" fontFamily="serif" fontSize="7" fill="#2a2a2a" textAnchor="middle" letterSpacing="1">HG</text>
-        <path d="M85 38 Q79 38 77 48 L73 112 Q71 132 90 140 Q107 146 117 132 Q125 120 113 110 L109 87 L121 82 L115 46 Q113 38 105 38Z" fill="#161616" />
-        <rect x="79" y="38" width="34" height="4" rx="1" fill="#1c1c1c" />
-      </svg>
-    ),
-  },
-  {
-    label: 'Brand Keychain',
-    svg: (
-      <svg viewBox="0 0 160 160" style={{ width: 130, height: 130 }}>
-        <circle cx="80" cy="28" r="8" fill="none" stroke="#2a2a2a" strokeWidth="2" />
-        <line x1="80" y1="36" x2="80" y2="55" stroke="#222" strokeWidth="2" />
-        <rect x="54" y="55" width="52" height="72" rx="6" fill="#1a1a1a" />
-        <circle cx="80" cy="63" r="5" fill="#141414" />
-        <text x="80" y="98" fontFamily="serif" fontSize="14" fill="#2a2a2a" textAnchor="middle" letterSpacing="2">HG</text>
-        <line x1="64" y1="106" x2="96" y2="106" stroke="#222" strokeWidth="0.8" />
-        <text x="80" y="116" fontFamily="sans-serif" fontSize="5" fill="#1e1e1e" textAnchor="middle" letterSpacing="1.5">HIDDEN GENESIS</text>
-        <ellipse cx="80" cy="132" rx="30" ry="5" fill="#111" opacity="0.5" />
-      </svg>
-    ),
+    label: 'Thanks Card',
+    image: '/images/ty-card.jpg',
   },
 ]
 
@@ -91,8 +47,6 @@ const extraItems = [
     ),
   },
 ]
-
-type SlideItem = { label: string; svg?: ReactNode; image?: string }
 
 const allSlides: SlideItem[] = [
   ...accItems,
@@ -149,13 +103,23 @@ export default function Accessories() {
         {/* Acc grid */}
         <ScrollReveal>
           <div className="grid grid-cols-2 gap-[2px]">
-            {accItems.map((a) => (
-              <div key={a.label} className="bg-charcoal aspect-square flex flex-col relative overflow-hidden group">
-                <div className="flex-1 flex items-center justify-center p-8">{a.svg}</div>
-                <div className="px-5 py-4 border-t border-dark-gray text-[10px] tracking-[0.3em] uppercase text-mid-gray group-hover:text-accent transition-colors">
-                  {a.label}
+            {accItems.map((a, i) => (
+              <React.Fragment key={a.label}>
+                {i === 1 && <div className="bg-transparent aspect-square" />}
+                <div className="bg-charcoal aspect-square flex flex-col relative overflow-hidden group">
+                  <div className="flex-1 flex items-center justify-center relative">
+                    {a.image ? (
+                      <Image src={a.image} alt={a.label} fill className="object-cover" />
+                    ) : (
+                      <div className="p-8 flex items-center justify-center w-full h-full">{a.svg}</div>
+                    )}
+                  </div>
+                  <div className="relative z-10 bg-charcoal px-5 py-4 border-t border-dark-gray text-[10px] tracking-[0.3em] uppercase text-mid-gray group-hover:text-accent transition-colors">
+                    {a.label}
+                  </div>
                 </div>
-              </div>
+                {i === 0 && <div className="bg-transparent aspect-square" />}
+              </React.Fragment>
             ))}
           </div>
         </ScrollReveal>

@@ -15,9 +15,8 @@ export default function Hero() {
       }}
     >
       {/* Left */}
-      <div className={`flex flex-col px-6 md:px-[60px] pt-20 relative z-10 ${
-        isDesktopMode && vh > 760 ? 'md:pt-30' : 'md:pt-50'
-      }`}>
+      <div className={`flex flex-col px-6 md:px-[60px] pt-20 relative z-10 ${isDesktopMode && vh > 760 ? 'md:pt-30' : 'md:pt-50'
+        }`}>
         <div className="flex items-center gap-4 mb-6">
           <span className="w-10 h-[1px] bg-accent" />
           <span className="text-[10px] tracking-[0.4em] uppercase text-accent">
@@ -51,13 +50,11 @@ export default function Hero() {
       {/* Right - Hero image */}
       <div className="relative min-h-[70vh] md:h-full">
         <Image
-          src="/images/hero.png"
+          src="/images/hero-2.jpeg"
           alt="Hidden Genesis model"
           fill
-          className={`object-contain ${
-            isDesktopMode && vh > 760 ? 'md:object-top pt-50' : 'md:object-bottom'
-          }`}
-          preload
+          className="object-contain md:object-cover md:object-top md:mt-[84px]"
+          priority
         />
       </div>
     </section>
