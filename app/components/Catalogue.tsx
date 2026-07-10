@@ -117,7 +117,7 @@ export default function Catalogue() {
       <div className="flex items-center gap-5 mb-16">
         <span className="text-[10px] tracking-[0.4em] uppercase text-accent">Product Catalogue</span>
         <div className="flex-1 h-[1px] bg-dark-gray" />
-        <span className="font-serif text-[11px] text-dark-gray">01</span>
+        <span className="font-serif text-[11px] text-dark-gray">02</span>
       </div>
 
       <ScrollReveal>

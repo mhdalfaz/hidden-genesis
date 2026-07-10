@@ -11,11 +11,11 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <Moodboard />
       <Catalogue />
       <Accessories />
       <Packaging />
       <BrandStory />
-      <Moodboard />
       <Connect />
       <Footer />
     </>

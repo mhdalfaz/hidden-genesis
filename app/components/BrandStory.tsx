@@ -7,7 +7,7 @@ export default function BrandStory() {
       <div className="flex items-center gap-5 mb-16">
         <span className="text-[10px] tracking-[0.4em] uppercase text-accent">Brand Story</span>
         <div className="flex-1 h-[1px] bg-dark-gray" />
-        <span className="font-serif text-[11px] text-dark-gray">04</span>
+        <span className="font-serif text-[11px] text-dark-gray">05</span>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-[120px] items-center">

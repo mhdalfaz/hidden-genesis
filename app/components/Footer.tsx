@@ -57,7 +57,7 @@ export default function Footer() {
 
       {/* Bottom */}
       <div className="pt-8 border-t border-dark-gray text-center">
-        <div className="text-[11px] text-dark-gray tracking-[0.2em]">
+        <div className="text-[11px] text-white tracking-[0.2em]">
           &copy; 2026 Hidden Genesis. All rights reserved.
         </div>
       </div>

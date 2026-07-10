@@ -56,6 +56,8 @@ export default function Hero() {
           className="object-contain md:object-cover md:object-top md:mt-[84px]"
           priority
         />
+        {/* Black fade on the left 5% (only on 766px+) */}
+        <div className="hidden min-[766px]:block absolute inset-y-0 left-0 w-[8%] bg-gradient-to-r from-black to-transparent pointer-events-none md:mt-[84px]" />
       </div>
     </section>
   )

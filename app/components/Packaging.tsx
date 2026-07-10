@@ -5,7 +5,9 @@ import Image from 'next/image'
 import ScrollReveal from './ScrollReveal'
 import Modal from './Modal'
 
-const packThumbs = [
+type SlideItem = { label: string; svg?: ReactNode; image?: string }
+
+const packThumbs: SlideItem[] = [
   {
     label: 'Open Box',
     image: '/images/hang-tag.jpg',
@@ -15,43 +17,14 @@ const packThumbs = [
     image: '/images/neck-label.jpg',
   },
   {
-    label: 'Emboss Logo',
-    svg: (
-      <svg viewBox="0 0 240 200" style={{ width: '100%', height: '100%' }}>
-        <rect width="240" height="200" fill="#161616" />
-        <radialGradient id="emLight" cx="40%" cy="40%" r="50%">
-          <stop offset="0%" stopColor="#202020" />
-          <stop offset="100%" stopColor="#131313" />
-        </radialGradient>
-        <rect width="240" height="200" fill="url(#emLight)" />
-        <text x="120" y="95" fontFamily="serif" fontSize="22" fill="#1a1a1a" textAnchor="middle" letterSpacing="5">HIDDEN</text>
-        <text x="120" y="118" fontFamily="serif" fontSize="22" fill="#1a1a1a" textAnchor="middle" letterSpacing="5">GENESIS</text>
-        <text x="119" y="94" fontFamily="serif" fontSize="22" fill="#222" textAnchor="middle" letterSpacing="5">HIDDEN</text>
-        <text x="119" y="117" fontFamily="serif" fontSize="22" fill="#222" textAnchor="middle" letterSpacing="5">GENESIS</text>
-        <line x1="80" y1="128" x2="160" y2="128" stroke="#1c1c1c" strokeWidth="0.8" />
-        <text x="120" y="140" fontFamily="sans-serif" fontSize="7" fill="#1a1a1a" textAnchor="middle" letterSpacing="3">BORN FROM SILENCE</text>
-      </svg>
-    ),
+    label: 'Brand Label',
+    image: '/images/brand-label.jpg',
   },
   {
     label: 'Thank You Card',
-    svg: (
-      <svg viewBox="0 0 240 200" style={{ width: '100%', height: '100%' }}>
-        <rect width="240" height="200" fill="#181818" />
-        <rect x="40" y="45" width="160" height="110" rx="3" fill="#1a1a1a" />
-        <rect x="40" y="45" width="160" height="4" rx="2" fill="#1e1e1e" />
-        <text x="120" y="90" fontFamily="serif" fontSize="10" fill="#252525" textAnchor="middle" letterSpacing="1" fontStyle="italic">Sometimes,</text>
-        <text x="120" y="106" fontFamily="serif" fontSize="10" fill="#252525" textAnchor="middle" letterSpacing="1" fontStyle="italic">not reacting is the</text>
-        <text x="120" y="122" fontFamily="serif" fontSize="10" fill="#252525" textAnchor="middle" letterSpacing="1" fontStyle="italic">strongest response.</text>
-        <line x1="80" y1="132" x2="160" y2="132" stroke="#1e1e1e" strokeWidth="0.8" />
-        <text x="120" y="145" fontFamily="sans-serif" fontSize="7" fill="#1e1e1e" textAnchor="middle" letterSpacing="2">Thank you for supporting</text>
-        <text x="120" y="155" fontFamily="sans-serif" fontSize="7" fill="#222" textAnchor="middle" letterSpacing="2">Hidden Genesis.</text>
-      </svg>
-    ),
+    image: '/images/ty-card.jpg',
   },
 ]
-
-type SlideItem = { label: string; svg?: ReactNode; image?: string }
 
 const allSlides: SlideItem[] = [
   { label: 'Premium Packaging Box', image: '/images/package.jpg' },
@@ -81,7 +54,7 @@ export default function Packaging() {
       <div className="flex items-center gap-5 mb-16">
         <span className="text-[10px] tracking-[0.4em] uppercase text-accent">Packaging</span>
         <div className="flex-1 h-[1px] bg-dark-gray" />
-        <span className="font-serif text-[11px] text-dark-gray">03</span>
+        <span className="font-serif text-[11px] text-dark-gray">04</span>
       </div>
 
       {/* Hero */}
@@ -113,7 +86,7 @@ export default function Packaging() {
               <ul className="list-none flex flex-col gap-3">
                 {[
                   'Premium Matte Finish',
-                  'Emboss Logo on Cover',
+                  'Brand Label',
                   'Magnetic Closure',
                   'Thank You Card Included',
                   'Black Tissue Paper Inner',

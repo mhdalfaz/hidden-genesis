@@ -29,6 +29,7 @@ export default function Modal({ open, onClose, images, title, subtitle, renderSl
     if (open) {
       document.addEventListener('keydown', handleKeyDown)
       document.body.style.overflow = 'hidden'
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setActiveIndex(0)
       if (scrollRef.current) scrollRef.current.scrollLeft = 0
     }
