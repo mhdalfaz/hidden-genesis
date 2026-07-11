@@ -7,7 +7,7 @@ const footerNav = [
 
 const footerContact = [
   { href: 'https://www.instagram.com/hidden.genesis_', label: 'Instagram' },
-  { href: 'https://www.tiktok.com/@hidden.genesis4', label: 'TikTok' },
+  { href: 'https://www.tiktok.com/@hidden_genesis', label: 'TikTok' },
   { href: 'https://wa.me/62882001428923', label: 'WhatsApp' },
   { href: 'https://id.shp.ee/UcKqEJBH', label: 'Shopee' },
 ]
